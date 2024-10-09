@@ -4,24 +4,15 @@ Welcome to the SuamiSihat email signature guide! This document will help you eas
 
 ## Steps to Create Your Email Signature in Gmail
 
-### 1. Copy the Email Signature
+### 1. Copy the Email Signature 
 
-**SuamiSihat Email Signature:**
+- Windows (Ctrl + A, Ctrl + C)
+- MacOS (Cmd + A, Cmd + C )
 
-Best regards,
-
-[Your Name]
-[Your Position]
-SuamiSihat
-[Your Contact Number]
-[Your Email Address]
-[Your Website URL]
-
-Follow us on:
-[Facebook Icon] [Twitter Icon] [Instagram Icon]
+[**SuamiSihat Email Signature:**](https://htmlpreview.github.io/?https://github.com/SuamiSihat/mail-signature/blob/main/index.html)
 
 
-**Note:** Replace placeholders (e.g., `[Your Name]`, `[Your Position]`, etc.) with your actual details.
+**Note:** Replace placeholders (e.g., `[Your Name]`, `[Your Position]`, `[Your Phone]`, `[Your Mail]`.) with your actual details.
 
 ### 2. Access Your Gmail Settings
 
@@ -36,7 +27,7 @@ Follow us on:
 
 ### 4. Paste Your Signature
 
-1. In the signature editor, paste the email signature you copied earlier (Ctrl + V or Command + V).
+1. In the signature editor, paste the email signature you copied earlier (Ctrl + V or Cmd + V).
 2. Format your signature as needed (you can change fonts, colors, and styles).
 
 ### 5. Set Default Signature (Optional)
