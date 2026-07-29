@@ -1,54 +1,56 @@
 # SuamiSihat Email Signature Setup
 
-Welcome to the SuamiSihat email signature guide! This document will help you easily set up your email signature in Gmail. Follow the steps below to get started.
+Welcome to the **SuamiSihat Email Signature** repository! This document provides instructions for setting up and customizing your official company email signature in Gmail.
 
+---
 
-## Steps to Create Your Email Signature in Gmail
+## 🚀 Quick Preview & Copy
 
-### 1. Copy the Email Signature 
+Click the link below to preview the email signature in your browser:
 
-Click this link [**SuamiSihat Email Signature:**](https://htmlpreview.github.io/?https://github.com/SuamiSihat/mail-signature/blob/main/index.html)
+👉 [**Preview Email Signature**](https://htmlpreview.github.io/?https://github.com/SuamiSihat/mail-signature/blob/main/index.html)
 
-- Windows (Ctrl + A, Ctrl + C)
-- MacOS (Cmd + A, Cmd + C )
+---
 
-### 2. Access Your Gmail Settings
+## 📋 Steps to Add Your Signature in Gmail
 
-1. Open Gmail and log into your account.
-2. In the upper right corner, click on the **Gear icon** ⚙️ to access **Settings**.
-3. Select **See all settings** from the dropdown menu.
+### 1. Copy the Signature
+1. Open the [**Preview Email Signature**](https://htmlpreview.github.io/?https://github.com/SuamiSihat/mail-signature/blob/main/index.html) link above.
+2. Select everything on the page:
+   - **Windows:** Press `Ctrl + A`, then `Ctrl + C`
+   - **macOS:** Press `Cmd + A`, then `Cmd + C`
 
-### 3. Navigate to the Signature Section
+### 2. Access Gmail Settings
+1. Open [Gmail](https://mail.google.com) and log into your account.
+2. Click the **Gear icon** ⚙️ in the top right corner and select **See all settings**.
 
-1. Scroll down to the **Signature** section.
-2. Click on **Create New** to add a new signature.
+### 3. Create or Edit Signature
+1. Under the **General** tab, scroll down to the **Signature** section.
+2. Click **Create new** (or edit an existing signature).
+3. Paste the copied signature into the text editor (`Ctrl + V` or `Cmd + V`).
 
-### 4. Paste Your Signature
+### 4. Personalize Your Details
+In the Gmail signature editor, replace the placeholders with your information:
+- `[Your Name]` → Your full name
+- `[Your Position]` → Your job title
+- `[Your Phone]` → Your direct line or mobile number
+- `[Your Mail]` → Your company email address
 
-1. In the signature editor, paste the email signature you copied earlier (Ctrl + V or Cmd + V).
-2. Format your signature as needed with your detail.
+> **Tip:** Highlight placeholder text before typing to retain the original font formatting.
 
-> **Note:** Replace placeholders (e.g., `[Your Name]`, `[Your Position]`, `[Your Phone]`, `[Your Mail]`.) with your actual details.
+### 5. Configure Signature Defaults
+1. Under **Signature defaults**, choose your signature for:
+   - **For new emails use**
+   - **On reply/forward use**
+2. Scroll to the bottom of the page and click **Save Changes**.
 
-### 5. Set Default Signature (Optional)
+---
 
-1. If you want this signature to be used automatically for new emails and replies/forwards, scroll down to the **Signature defaults** section.
-2. Choose your new signature from the dropdown menus for **New emails** and **On reply/forward**.
+## 🛠️ Technical Details & Hosting
 
-### 6. Save Changes
+- Image assets are hosted directly via GitHub CDN (`raw.githubusercontent.com`) to ensure reliable loading across all email clients (Outlook, Gmail, Apple Mail, mobile apps) without HTTP redirect blocks.
+- HTML structure is optimized with inline CSS styles for maximum cross-client compatibility.
 
-1. Scroll down to the bottom of the settings page.
-2. Click on the **Save Changes** button to apply your new signature.
+---
 
-### 7. Test Your Signature
-
-1. Compose a new email to check how your signature looks.
-2. Make any adjustments if necessary.
-
-## Troubleshooting
-
-- If your signature doesn’t appear correctly, ensure that you have copied and pasted it correctly without additional formatting.
-- You can use the formatting options in the Gmail signature editor to customize your signature further.
-
-
-Thank you for using the SuamiSihat email signature!
+Thank you for using the **SuamiSihat** official email signature!
