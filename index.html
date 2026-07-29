@@ -1,159 +1,162 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SuamiSihat Email Signature</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SuamiSihat Email Signature Generator</title>
+  <meta name="description" content="Generate your personalised SuamiSihat company email signature with live preview, one-click copy for Gmail, and vCard QR code.">
+  <link rel="icon" href="https://raw.githubusercontent.com/SuamiSihat/mail-signature/main/assets/ss-logo.png">
+  <link rel="stylesheet" href="style.css">
+  <!-- QR Code Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
-<body style="margin: 0; padding: 20px; font-family: Arial, sans-serif;">
-<div dir="ltr">
-    <table style="direction:ltr;border-collapse:collapse;width:100%;max-width:600px;" width="100%">
-        <tbody>
-            <tr>
-                <td style="line-height:1%;padding-top:16px;font-size:1px"></td>
-            </tr>
-            <tr>
-                <td>
-                    <table cellpadding="0" cellspacing="0" style="border-collapse:collapse;line-height:1.15;width:100%;">
-                        <tbody>
-                            <tr>
-                                <td style="vertical-align:top;padding:.01px 14px 0.01px 1px;width:65px;text-align:center">
-                                    <p style="margin:1px"><img border="0" src="https://raw.githubusercontent.com/SuamiSihat/mail-signature/main/assets/ss-logo.png" height="55" width="65" alt="SuamiSihat Logo" style="max-width:100%;height:auto;border-radius:0;border:0;display:block"></p>
-                                </td>
-                                <td valign="top" style="padding:.01px 0.01px 0.01px 14px;vertical-align:top;border-left:solid 1px #bdbdbd">
-                                    <table cellpadding="0" cellspacing="0" style="border-collapse:collapse;width:100%;">
-                                        <tbody>
-                                            <tr>
-                                                <td style="padding:.01px">
-                                                    <p style="margin:.1px;line-height:120%;font-size:16px"><span style="font-family:Arial;font-size:16px;font-weight:bold;color:#1c1c1c;letter-spacing:0">[Your Name]</span><br><span style="font-family:Arial;font-size:13px;font-weight:bold;color:#646464">[Your Position], SuamiSihat (M) Sdn Bhd</span></p>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <table cellpadding="0" cellspacing="0" style="border-collapse:collapse;width:100%;">
-                                                        <tbody>
-                                                            <tr>
-                                                                <td style="padding-top:14px;white-space:nowrap;font-family:Arial;font-size:11px;">
-                                                                    <p style="margin:1px"><a href="tel:+60356260031" style="text-decoration:unset;color:#212121">+603 5626 0031 (HQ)</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="tel:[Your Phone]" style="text-decoration:unset;color:#212121">[Your Phone]</a></p>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td style="padding-top:8px;white-space:nowrap;font-family:Arial;font-size:11px;">
-                                                                    <p style="margin:1px"><a href="https://suamisihat.com.my" style="text-decoration:unset;color:#212121">suamisihat.com.my</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="mailto:[Your Mail]" style="text-decoration:unset;color:#212121">[Your Mail]</a></p>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td style="padding-top:8px;white-space:normal;font-family:Arial;font-size:11px;">
-                                                                    <p style="margin:1px"><a href="https://maps.google.com/?q=No.+9,+Tingkat+2,+Jalan+Kemboja+33,+Taman+Aman,+42700+Banting,+Selangor+Darul+Ehsan,+MALAYSIA" style="text-decoration:unset;color:#212121">No. 9, Tingkat 2, Jalan Kemboja 33, Taman Aman, 42700 Banting, Selangor Darul Ehsan, MALAYSIA.</a></p>
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding:14px 0.01px 0.01px 0.01px">
-                                                    <table border="0" cellpadding="0" cellspacing="0">
-                                                        <tbody>
-                                                            <tr>
-                                                                <td align="left" style="padding-right:6px;text-align:center">
-                                                                    <a href="https://my.linkedin.com/company/suamisihat" rel="nofollow noreferrer" target="_blank"><img width="24" height="24" src="https://raw.githubusercontent.com/SuamiSihat/mail-signature/main/assets/ld.png" style="border:none" alt="LinkedIn"></a>
-                                                                </td>
-                                                                <td align="left" style="padding-right:6px;text-align:center">
-                                                                    <a href="https://facebook.com/suamisihat.com.my" rel="nofollow noreferrer" target="_blank"><img width="24" height="24" src="https://raw.githubusercontent.com/SuamiSihat/mail-signature/main/assets/fb.png" style="border:none" alt="Facebook"></a>
-                                                                </td>
-                                                                <td align="left" style="padding-right:6px;text-align:center">
-                                                                    <a href="https://www.tiktok.com/@suamisihatofficial" rel="nofollow noreferrer" target="_blank"><img width="24" height="24" src="https://raw.githubusercontent.com/SuamiSihat/mail-signature/main/assets/tt.png" style="border:none" alt="TikTok"></a>
-                                                                </td>
-                                                                <td align="left" style="padding-right:6px;text-align:center">
-                                                                    <a href="https://www.instagram.com/suamisihat.com.my/" rel="nofollow noreferrer" target="_blank"><img width="24" height="24" src="https://raw.githubusercontent.com/SuamiSihat/mail-signature/main/assets/ig.png" style="border:none" alt="Instagram"></a>
-                                                                </td>
-                                                                <td align="left" style="padding-right:6px;text-align:center">
-                                                                    <a href="https://x.com/suamisihat" rel="nofollow noreferrer" target="_blank"><img width="24" height="24" src="https://raw.githubusercontent.com/SuamiSihat/mail-signature/main/assets/x.png" style="border:none" alt="X (Twitter)"></a>
-                                                                </td>
-                                                                <td align="left" style="padding-right:6px;text-align:center">
-                                                                    <a href="https://www.youtube.com/c/SuamiSihat" rel="nofollow noreferrer" target="_blank"><img width="24" height="24" src="https://raw.githubusercontent.com/SuamiSihat/mail-signature/main/assets/yt.png" style="border:none" alt="YouTube"></a>
-                                                                </td>
-                                                                <td align="left" style="padding-right:6px;text-align:center">
-                                                                    <a href="https://t.me/suamisihat" rel="nofollow noreferrer" target="_blank"><img width="24" height="24" src="https://raw.githubusercontent.com/SuamiSihat/mail-signature/main/assets/tele.png" style="border:none" alt="Telegram"></a>
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </td>
-            </tr>
-            <tr>
-                <td style="line-height:1%;padding-top:16px;font-size:1px"></td>
-            </tr>
-            <tr>
-                <td>
-                    <table cellpadding="0" cellspacing="0" style="width:100%">
-                        <tbody>
-                            <tr>
-                                <td style="text-align:left">
-                                    <a href="https://t.me/suamisihat" rel="nofollow noreferrer" target="_blank"><img src="https://raw.githubusercontent.com/SuamiSihat/mail-signature/main/assets/jointhemovement.png" style="width:100%;height:auto;max-width:448px;" alt="Join The Movement Banner"></a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </td>
-            </tr>
-            <tr>
-                <td style="line-height:1%;padding-top:16px;font-size:1px"></td>
-            </tr>
-            <tr>
-                <td>
-                    <table cellpadding="0" cellspacing="0" style="width:100%">
-                        <tbody>
-                            <tr>
-                                <td align="left">
-                                    <table cellpadding="0" cellspacing="0">
-                                        <tbody>
-                                            <tr>
-                                                <td style="padding-bottom:4px;text-align:left">
-                                                    <p style="margin:1px"><span style="font-size:12px;color:#222222">Download our app now!</span></p>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td align="left">
-                                                    <table cellpadding="0" cellspacing="0">
-                                                        <tbody>
-                                                            <tr>
-                                                                <td style="padding-right:5px">
-                                                                    <a href="https://play.google.com/store/apps/details?id=com.suamisihat.user&amp;pcampaignid=web_share" style="text-decoration:none" rel="nofollow noreferrer" target="_blank"><img src="https://raw.githubusercontent.com/SuamiSihat/mail-signature/main/assets/playstore.png" style="height:33px" alt="Google Play Store"></a>
-                                                                </td>
-                                                                <td>
-                                                                    <a href="https://apps.apple.com/my/app/suamisihat/id6670251626" style="text-decoration:none" rel="nofollow noreferrer" target="_blank"><img src="https://raw.githubusercontent.com/SuamiSihat/mail-signature/main/assets/appstore.png" style="height:33px" alt="Apple App Store"></a>
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </td>
-            </tr>
-            <tr>
-                <td style="line-height:1%;padding-top:16px;font-size:1px"></td>
-            </tr>
-            <tr>
-                <td style="font-family:Arial;color:#808080;text-align:left;font-size:10px;line-height:120%">IMPORTANT: The contents of this email and any attachments are confidential. They are intended for the named recipient(s) only. If you have received this email by mistake, please notify the sender immediately and do not disclose the contents to anyone or make copies thereof.</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+<body>
+
+  <!-- ========== NAVBAR ========== -->
+  <nav class="navbar">
+    <a class="navbar-brand" href="https://suamisihat.com.my" target="_blank" rel="noopener noreferrer">
+      <img src="https://raw.githubusercontent.com/SuamiSihat/mail-signature/main/assets/ss-logo.png" alt="SuamiSihat Logo">
+      <span class="navbar-title">SuamiSihat <span>Signature</span> Generator</span>
+    </a>
+    <div class="navbar-actions">
+      <button class="btn-theme" id="themeToggle" title="Toggle dark/light mode" aria-label="Toggle theme">🌙</button>
+    </div>
+  </nav>
+
+  <!-- ========== MAIN ========== -->
+  <main class="main-container">
+
+    <div class="page-header">
+      <h1>Build Your Email Signature</h1>
+      <p>Fill in your details below — the preview updates live. Copy and paste into Gmail in seconds.</p>
+    </div>
+
+    <div class="layout-grid">
+
+      <!-- ====== LEFT COLUMN: Form + Actions ====== -->
+      <div class="left-col">
+
+        <!-- Personal Details Form -->
+        <div class="card" style="margin-bottom: 18px;">
+          <div class="card-header">
+            <div class="card-header-icon">👤</div>
+            <div>
+              <h2>Your Details</h2>
+              <p>Replace with your personal information</p>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="form-group">
+              <label for="inputName">Full Name</label>
+              <input type="text" id="inputName" placeholder="e.g. Ahmad Rizal bin Abdullah" autocomplete="name">
+            </div>
+            <div class="form-group">
+              <label for="inputPosition">Job Title / Position</label>
+              <input type="text" id="inputPosition" placeholder="e.g. Senior Sales Executive" autocomplete="organization-title">
+            </div>
+            <div class="form-group">
+              <label for="inputPhone">Direct Phone / Mobile</label>
+              <input type="tel" id="inputPhone" placeholder="e.g. +6012 345 6789" autocomplete="tel">
+            </div>
+            <div class="form-group">
+              <label for="inputEmail">Work Email</label>
+              <input type="email" id="inputEmail" placeholder="e.g. ahmad@suamisihat.com.my" autocomplete="email">
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="card" style="margin-bottom: 18px;">
+          <div class="card-header">
+            <div class="card-header-icon">📋</div>
+            <div>
+              <h2>Copy to Gmail</h2>
+              <p>One-click copy — paste directly into Gmail</p>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="btn-actions">
+              <button class="btn btn-primary" id="copyBtn">
+                📋 Copy Signature
+              </button>
+              <div class="copy-feedback" id="copyFeedback"></div>
+            </div>
+            <div class="steps" style="margin-top: 16px;">
+              <div class="step">
+                <div class="step-num">1</div>
+                <span>Click <strong>Copy Signature</strong> above</span>
+              </div>
+              <div class="step">
+                <div class="step-num">2</div>
+                <span>Open <strong>Gmail → Settings ⚙️ → See all settings → Signature</strong></span>
+              </div>
+              <div class="step">
+                <div class="step-num">3</div>
+                <span>Click <strong>Create new</strong>, then paste (<kbd>Ctrl+V</kbd> / <kbd>Cmd+V</kbd>)</span>
+              </div>
+              <div class="step">
+                <div class="step-num">4</div>
+                <span>Scroll down and click <strong>Save Changes</strong></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- vCard QR Code -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-header-icon">📇</div>
+            <div>
+              <h2>Contact QR Code</h2>
+              <p>Let colleagues scan to save your contact instantly</p>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="qr-section">
+              <div id="qrPlaceholder" class="qr-placeholder">
+                <span>📷</span>
+                Fill in your<br>details above
+              </div>
+              <div id="qrcode" style="display:none;"></div>
+              <div class="qr-info">
+                <h3>Scan to Save Contact</h3>
+                <p>This QR code contains your full contact information as a vCard. Anyone with a smartphone can scan it to instantly add you to their contacts.</p>
+                <button class="btn btn-secondary" id="vcardBtn" style="width: auto; padding: 9px 16px;">
+                  ⬇️ Download .vcf
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- end left-col -->
+
+      <!-- ====== RIGHT COLUMN: Live Preview ====== -->
+      <div class="right-col preview-panel">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-header-icon">👁️</div>
+            <div>
+              <h2>Live Preview</h2>
+              <p>Updates as you type</p>
+            </div>
+            <div class="preview-badge" style="margin-left:auto; flex-shrink:0;">
+              <svg width="7" height="7" viewBox="0 0 8 8" fill="currentColor"><circle cx="4" cy="4" r="4"/></svg>
+              LIVE
+            </div>
+          </div>
+          <div class="preview-wrapper">
+            <div id="signaturePreview"></div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end layout-grid -->
+  </main>
+
+  <!-- Config + Generator Scripts -->
+  <script src="config.js"></script>
+  <script src="generator.js"></script>
+
 </body>
 </html>
