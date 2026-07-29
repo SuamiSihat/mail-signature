@@ -1,0 +1,151 @@
+defaultCompanyId: ssh
+configVersion: "2.1"
+lastUpdated: "2026-07-29"
+
+featureDefaults:
+  showGroupLinks: true
+  showSocialLinks: true
+  showCampaignBanner: true
+  showAppLinks: true
+  showContactQr: true
+
+groupWebsites:
+  SS Health: "https://suamisihat.com.my"
+  SS Wellness: "https://suamisihat.com.my/ssclinic/"
+  SS Clinic: "https://suamisihat.com.my/ssclinic/"
+  SS Ecommerce: "https://store.suamisihat.my"
+  SS Technology: "https://suamisihat.com.my"
+
+companies:
+  ssh:
+    id: ssh
+    name: "SS Health"
+    hqPhone: "+60356260031"
+    hqPhoneDisplay: "+603 5626 0031"
+    hqPhoneLabel: HQ
+    website: "https://suamisihat.com.my"
+    websiteDisplay: suamisihat.com.my
+    address: "U1, UOA Business Park, 8-3A, 51A, Jalan Pengaturcara, Seksyen U1, 40150 Shah Alam, Selangor Darul Ehsan, MALAYSIA"
+    googleMapsUrl: "https://maps.google.com/?q=U1,+UOA+Business+Park,+8-3A,+51A,+Jalan+Pengaturcara,+Seksyen+U1,+40150+Shah+Alam,+Selangor+Darul+Ehsan,+MALAYSIA"
+    logoUrl: "https://raw.githubusercontent.com/SuamiSihat/mail-signature/main/assets/brand/ssh/primary-light.png"
+    logoPreviewUrl: "assets/brand/ssh/primary-light.png"
+    emailLogoUrl: "https://raw.githubusercontent.com/SuamiSihat/mail-signature/main/assets/brand/ssh/secondary-light.png"
+    emailLogoPreviewUrl: "assets/brand/ssh/secondary-light.png"
+    features:
+      showContactQr: true
+
+  ssw:
+    id: ssw
+    name: "SS Wellness"
+    hqPhone: "+60107893661"
+    hqPhoneDisplay: "010-789 3661"
+    hqPhoneLabel: Clinic
+    website: "https://suamisihat.com.my/ssclinic/"
+    websiteDisplay: suamisihat.com.my/ssclinic
+    address: "8-3A, UOA Business Park, 1, Jalan Pengaturcara U1/51, Kawasan Perindustrian Temasya, 40150 Shah Alam, Selangor, MALAYSIA"
+    googleMapsUrl: "https://maps.google.com/?q=8-3A,+UOA+Business+Park,+1,+Jalan+Pengaturcara+U1%2F51,+Kawasan+Perindustrian+Temasya,+40150+Shah+Alam,+Selangor"
+    logoUrl: "https://raw.githubusercontent.com/SuamiSihat/mail-signature/main/assets/brand/ssw/primary-light.png"
+    logoPreviewUrl: "assets/brand/ssw/primary-light.png"
+    emailLogoUrl: "https://raw.githubusercontent.com/SuamiSihat/mail-signature/main/assets/brand/ssw/secondary-light.png"
+    emailLogoPreviewUrl: "assets/brand/ssw/secondary-light.png"
+    features:
+      showContactQr: true
+
+  ssc:
+    id: ssc
+    name: "SS Clinic"
+    hqPhone: "+60107893661"
+    hqPhoneDisplay: "010-789 3661"
+    hqPhoneLabel: Clinic
+    website: "https://suamisihat.com.my/ssclinic/"
+    websiteDisplay: suamisihat.com.my/ssclinic
+    address: "8-3A, UOA Business Park, 1, Jalan Pengaturcara U1/51, Kawasan Perindustrian Temasya, 40150 Shah Alam, Selangor, MALAYSIA"
+    googleMapsUrl: "https://maps.google.com/?q=8-3A,+UOA+Business+Park,+1,+Jalan+Pengaturcara+U1%2F51,+Kawasan+Perindustrian+Temasya,+40150+Shah+Alam,+Selangor"
+    logoUrl: "https://raw.githubusercontent.com/SuamiSihat/mail-signature/main/assets/brand/ssc/primary-light.png"
+    logoPreviewUrl: "assets/brand/ssc/primary-light.png"
+    emailLogoUrl: "https://raw.githubusercontent.com/SuamiSihat/mail-signature/main/assets/brand/ssc/secondary-light.png"
+    emailLogoPreviewUrl: "assets/brand/ssc/secondary-light.png"
+    features:
+      showContactQr: true
+
+  sse:
+    id: sse
+    name: "SS Ecommerce"
+    hqPhone: "+601159986564"
+    hqPhoneDisplay: "011-5998 6564"
+    hqPhoneLabel: Support
+    website: "https://store.suamisihat.my"
+    websiteDisplay: store.suamisihat.my
+    address: "No. 9, Tingkat 2, Jalan Kemboja 33, Taman Aman, 42700 Banting, Selangor Darul Ehsan, MALAYSIA"
+    googleMapsUrl: "https://maps.google.com/?q=No.+9,+Tingkat+2,+Jalan+Kemboja+33,+Taman+Aman,+42700+Banting,+Selangor+Darul+Ehsan,+MALAYSIA"
+    logoUrl: "https://raw.githubusercontent.com/SuamiSihat/mail-signature/main/assets/brand/sse/primary-light.png"
+    logoPreviewUrl: "assets/brand/sse/primary-light.png"
+    emailLogoUrl: "https://raw.githubusercontent.com/SuamiSihat/mail-signature/main/assets/brand/sse/secondary-light.png"
+    emailLogoPreviewUrl: "assets/brand/sse/secondary-light.png"
+    features:
+      showContactQr: true
+
+  sst:
+    id: sst
+    name: "SS Technology"
+    hqPhone: "+60356260031"
+    hqPhoneDisplay: "+603 5626 0031"
+    hqPhoneLabel: HQ
+    website: "https://suamisihat.com.my"
+    websiteDisplay: suamisihat.com.my
+    address: "No. 9, Tingkat 2, Jalan Kemboja 33, Taman Aman, 42700 Banting, Selangor Darul Ehsan, MALAYSIA"
+    googleMapsUrl: "https://maps.google.com/?q=No.+9,+Tingkat+2,+Jalan+Kemboja+33,+Taman+Aman,+42700+Banting,+Selangor+Darul+Ehsan,+MALAYSIA"
+    logoUrl: "https://raw.githubusercontent.com/SuamiSihat/mail-signature/main/assets/brand/sst/primary-light.png"
+    logoPreviewUrl: "assets/brand/sst/primary-light.png"
+    emailLogoUrl: "https://raw.githubusercontent.com/SuamiSihat/mail-signature/main/assets/brand/sst/secondary-light.png"
+    emailLogoPreviewUrl: "assets/brand/sst/secondary-light.png"
+    features:
+      showContactQr: true
+
+social:
+  linkedin:
+    url: "https://my.linkedin.com/company/suamisihat"
+    icon: "https://raw.githubusercontent.com/SuamiSihat/mail-signature/main/assets/social/linkedin.png"
+    label: LinkedIn
+  facebook:
+    url: "https://facebook.com/suamisihat.com.my"
+    icon: "https://raw.githubusercontent.com/SuamiSihat/mail-signature/main/assets/social/facebook.png"
+    label: Facebook
+  tiktok:
+    url: "https://www.tiktok.com/@suamisihatofficial"
+    icon: "https://raw.githubusercontent.com/SuamiSihat/mail-signature/main/assets/social/tiktok.png"
+    label: TikTok
+  instagram:
+    url: "https://www.instagram.com/suamisihat.com.my/"
+    icon: "https://raw.githubusercontent.com/SuamiSihat/mail-signature/main/assets/social/instagram.png"
+    label: Instagram
+  twitter:
+    url: "https://x.com/suamisihat"
+    icon: "https://raw.githubusercontent.com/SuamiSihat/mail-signature/main/assets/social/x.png"
+    label: "X (Twitter)"
+  youtube:
+    url: "https://www.youtube.com/c/SuamiSihat"
+    icon: "https://raw.githubusercontent.com/SuamiSihat/mail-signature/main/assets/social/youtube.png"
+    label: YouTube
+  telegram:
+    url: "https://t.me/suamisihat"
+    icon: "https://raw.githubusercontent.com/SuamiSihat/mail-signature/main/assets/social/telegram.png"
+    label: Telegram
+
+apps:
+  bannerImage: "https://raw.githubusercontent.com/SuamiSihat/mail-signature/main/assets/campaign/join-the-movement.png"
+  bannerAlt: "Join The Movement Banner"
+  bannerLink: "https://t.me/suamisihat"
+  downloadLabel: "Download our app now!"
+  playStore:
+    url: "https://play.google.com/store/apps/details?id=com.suamisihat.user&pcampaignid=web_share"
+    icon: "https://raw.githubusercontent.com/SuamiSihat/mail-signature/main/assets/apps/google-play.png"
+    alt: "Google Play Store"
+  appStore:
+    url: "https://apps.apple.com/my/app/suamisihat/id6670251626"
+    icon: "https://raw.githubusercontent.com/SuamiSihat/mail-signature/main/assets/apps/app-store.png"
+    alt: "Apple App Store"
+
+# Legal or Compliance approval is required before changing this notice.
+footer:
+  disclaimer: "CONFIDENTIALITY NOTICE: This email and any attachments are confidential and intended solely for the named recipient(s). If you received this email in error, please notify the sender immediately, delete it from your system, and do not copy, disclose, distribute, or rely on its contents."

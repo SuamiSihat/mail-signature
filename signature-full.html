@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SuamiSihat Full External Email Signature</title>
+  <meta name="description" content="SuamiSihat full external email signature, compatible with Gmail and Outlook.">
+</head>
+<body style="margin:20px;background:#FFFFFF;font-family:'Poppins',Arial,Helvetica,sans-serif;">
+  <div style="max-width:600px;margin:0 0 18px;padding:10px 14px;border:1px dashed #B9C8DE;background:#F5F8FC;color:#4B5563;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:18px;">
+    Full external signature preview. Personalise and copy it from the
+    <a href="index.html" style="color:#043388;font-weight:bold;text-decoration:none;">signature generator</a>.
+    For replies and internal email, use the <a href="signature-compact.html" style="color:#043388;font-weight:bold;text-decoration:none;">compact variant</a>.
+  </div>
+  <div id="signature"></div>
+  <script src="scripts/config-loader.js"></script>
+  <script src="scripts/signature-generator.js"></script>
+  <script>
+    (async () => {
+      const config = await loadSignatureConfig("config/signature-config.yaml");
+      const selected = getCompanyConfig(config, config.defaultCompanyId);
+      document.getElementById("signature").innerHTML =
+        localizePreviewAssets(
+          buildSignatureHTML("[Your Name]", "[Your Position]", "[Your Phone]", "[Your Email]", selected, "external")
+        );
+    })().catch(error => {
+      document.getElementById("signature").textContent = `Configuration error: ${error.message}`;
+    });
+  </script>
+</body>
+</html>
