@@ -335,6 +335,8 @@ function showCopyFeedback(success, variant = "") {
   el.textContent = success
     ? `${variant === "reply" ? "Compact" : "Full"} signature copied. Paste it into Gmail or Outlook.`
     : "Copy failed. Complete the required fields and try again.";
+  el.classList.toggle("success", success);
+  el.classList.toggle("error", !success);
   el.classList.add("visible");
   setTimeout(() => el.classList.remove("visible"), 3500);
 }
@@ -399,11 +401,15 @@ if (typeof document !== "undefined") document.addEventListener("DOMContentLoaded
   const copyExternalBtn = byId("copyExternalBtn");
   const copyReplyBtn = byId("copyReplyBtn");
   const mobileCopyBtn = byId("mobileCopyBtn");
+  const copyRequirementStatus = byId("copyRequirementStatus");
+  const installationGuide = byId("installationGuide");
   const previewWrapper = byId("previewWrapper");
   const previewStage = byId("previewStage");
   const previewClient = byId("previewClient");
   const previewZoom = byId("previewZoom");
   const previewThemeToggle = byId("previewThemeToggle");
+  const advancedPreview = byId("advancedPreview");
+  const advancedPreviewToggle = byId("advancedPreviewToggle");
   const emailChrome = byId("emailChrome");
   const variantButtons = document.querySelectorAll("[data-variant]");
   const instructionTabs = document.querySelectorAll("[data-instruction]");
@@ -596,8 +602,25 @@ if (typeof document !== "undefined") document.addEventListener("DOMContentLoaded
     markValidity(emailInput, emailError, values.emailValid, "Enter a valid work email address.");
 
     [copyExternalBtn, copyReplyBtn, mobileCopyBtn].forEach(button => {
-      if (button) button.disabled = !formValid;
+      if (!button) return;
+      button.disabled = !formValid;
+      button.title = formValid ? "" : "Complete the required fields to enable copying.";
     });
+    if (copyRequirementStatus) {
+      const missing = [];
+      if (!values.nameValid) missing.push("full name");
+      if (!values.positionValid) missing.push("job title");
+      if (!values.emailValid) missing.push("valid work email");
+      if (!values.phoneValid) missing.push("valid phone number");
+      if (missing.length) {
+        const finalItem = missing.pop();
+        const requirementList = missing.length ? `${missing.join(", ")} and ${finalItem}` : finalItem;
+        copyRequirementStatus.textContent = `Complete ${requirementList} to enable copying.`;
+      } else {
+        copyRequirementStatus.textContent = "Ready to copy. Choose the full or compact signature.";
+      }
+      copyRequirementStatus.classList.toggle("ready", formValid);
+    }
     const currentHTML = buildCurrentHTML(selectedVariant);
     previewEl.innerHTML = localizePreviewAssets(currentHTML);
     renderCompanySummary();
@@ -654,7 +677,9 @@ if (typeof document !== "undefined") document.addEventListener("DOMContentLoaded
       showCopyFeedback(false, variant);
       return;
     }
-    showCopyFeedback(await copySignature(buildCurrentHTML(variant)), variant);
+    const copied = await copySignature(buildCurrentHTML(variant));
+    showCopyFeedback(copied, variant);
+    if (copied && installationGuide) installationGuide.hidden = false;
   }
 
   copyExternalBtn?.addEventListener("click", () => handleCopy("external"));
@@ -672,6 +697,11 @@ if (typeof document !== "undefined") document.addEventListener("DOMContentLoaded
     const dark = previewWrapper?.dataset.previewTheme !== "dark";
     applyPreviewTheme(dark);
     scheduleDraftSave();
+  });
+  advancedPreviewToggle?.addEventListener("click", () => {
+    const expanded = !advancedPreview?.classList.contains("expanded");
+    advancedPreview?.classList.toggle("expanded", expanded);
+    advancedPreviewToggle.setAttribute("aria-expanded", String(expanded));
   });
   window.addEventListener("resize", updatePreviewScale);
   updateEmailChrome();
@@ -702,6 +732,9 @@ if (typeof document !== "undefined") document.addEventListener("DOMContentLoaded
     if (previewClient) previewClient.value = "canvas";
     if (previewZoom) previewZoom.value = "fit";
     applyPreviewTheme(false);
+    if (installationGuide) installationGuide.hidden = true;
+    advancedPreview?.classList.remove("expanded");
+    advancedPreviewToggle?.setAttribute("aria-expanded", "false");
     variantButtons.forEach(button => {
       const active = button.dataset.variant === "external";
       button.classList.toggle("active", active);

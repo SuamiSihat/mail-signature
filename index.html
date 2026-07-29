@@ -113,33 +113,38 @@
           </div>
           <div class="card-body">
             <div class="btn-actions copy-actions">
-              <button class="btn btn-primary" id="copyExternalBtn" type="button" disabled>
+              <button class="btn btn-primary" id="copyExternalBtn" type="button" aria-describedby="copyRequirementStatus" disabled>
                 <span class="material-symbols-rounded" aria-hidden="true">content_copy</span>
                 Copy full signature
               </button>
-              <button class="btn btn-secondary" id="copyReplyBtn" type="button" disabled>
+              <button class="btn btn-secondary" id="copyReplyBtn" type="button" aria-describedby="copyRequirementStatus" disabled>
                 <span class="material-symbols-rounded" aria-hidden="true">reply</span>
                 Copy compact signature
               </button>
+              <p class="copy-requirement" id="copyRequirementStatus" role="status" aria-live="polite">
+                Complete your full name, job title and work email to enable copying.
+              </p>
               <div class="copy-feedback" id="copyFeedback" role="status" aria-live="polite"></div>
             </div>
 
-            <div class="instruction-tabs" role="tablist" aria-label="Installation instructions">
-              <button class="instruction-tab active" type="button" role="tab" aria-selected="true" aria-controls="gmailSteps" id="gmailTab" data-instruction="gmail">Gmail</button>
-              <button class="instruction-tab" type="button" role="tab" aria-selected="false" aria-controls="outlookSteps" id="outlookTab" data-instruction="outlook">Outlook</button>
+            <div class="installation-guide" id="installationGuide" hidden>
+              <h3>Paste your signature</h3>
+              <p>Choose your email client for the final setup steps.</p>
+              <div class="instruction-tabs" role="tablist" aria-label="Installation instructions">
+                <button class="instruction-tab active" type="button" role="tab" aria-selected="true" aria-controls="gmailSteps" id="gmailTab" data-instruction="gmail">Gmail</button>
+                <button class="instruction-tab" type="button" role="tab" aria-selected="false" aria-controls="outlookSteps" id="outlookTab" data-instruction="outlook">Outlook</button>
+              </div>
+              <ol class="steps instruction-panel active" id="gmailSteps" role="tabpanel" aria-labelledby="gmailTab">
+                <li class="step"><span class="step-num">1</span><span>Open <strong>Gmail → Settings → See all settings</strong>.</span></li>
+                <li class="step"><span class="step-num">2</span><span>Create a new signature and paste it into the editor.</span></li>
+                <li class="step"><span class="step-num">3</span><span>Scroll down and select <strong>Save Changes</strong>.</span></li>
+              </ol>
+              <ol class="steps instruction-panel" id="outlookSteps" role="tabpanel" aria-labelledby="outlookTab" hidden>
+                <li class="step"><span class="step-num">1</span><span>Open <strong>Outlook → Settings → Accounts → Signatures</strong>.</span></li>
+                <li class="step"><span class="step-num">2</span><span>Create a signature and paste it into the editor.</span></li>
+                <li class="step"><span class="step-num">3</span><span>Choose the default account and save.</span></li>
+              </ol>
             </div>
-            <ol class="steps instruction-panel active" id="gmailSteps" role="tabpanel" aria-labelledby="gmailTab">
-              <li class="step"><span class="step-num">1</span><span>Copy the full or compact signature above.</span></li>
-              <li class="step"><span class="step-num">2</span><span>Open <strong>Gmail → Settings → See all settings</strong>.</span></li>
-              <li class="step"><span class="step-num">3</span><span>Create a new signature and paste it into the editor.</span></li>
-              <li class="step"><span class="step-num">4</span><span>Scroll down and select <strong>Save Changes</strong>.</span></li>
-            </ol>
-            <ol class="steps instruction-panel" id="outlookSteps" role="tabpanel" aria-labelledby="outlookTab" hidden>
-              <li class="step"><span class="step-num">1</span><span>Copy the full or compact signature above.</span></li>
-              <li class="step"><span class="step-num">2</span><span>Open <strong>Outlook → Settings → Accounts → Signatures</strong>.</span></li>
-              <li class="step"><span class="step-num">3</span><span>Create a signature and paste it into the editor.</span></li>
-              <li class="step"><span class="step-num">4</span><span>Choose the default account and save.</span></li>
-            </ol>
           </div>
         </div>
 
@@ -163,24 +168,30 @@
               <button type="button" class="segment active" data-variant="external" aria-pressed="true">Full</button>
               <button type="button" class="segment" data-variant="reply" aria-pressed="false">Compact</button>
             </div>
-            <div class="toolbar-group">
-              <label class="sr-only" for="previewClient">Email client preview</label>
-              <select id="previewClient" class="compact-select" aria-label="Email client preview">
-                <option value="canvas">Email canvas</option>
-                <option value="gmail">Gmail</option>
-                <option value="outlook">Outlook</option>
-              </select>
-              <label class="sr-only" for="previewZoom">Preview zoom</label>
-              <select id="previewZoom" class="compact-select" aria-label="Preview zoom">
-                <option value="fit">Fit</option>
-                <option value="1">100%</option>
-                <option value="0.85">85%</option>
-                <option value="0.7">70%</option>
-              </select>
-              <button class="preview-theme-toggle" id="previewThemeToggle" type="button" aria-pressed="false" aria-label="Switch preview to dark mode">
-                <span class="material-symbols-rounded" aria-hidden="true">dark_mode</span>
-                <span class="preview-theme-label">Dark</span>
+            <div class="advanced-preview" id="advancedPreview">
+              <button class="advanced-preview-toggle" id="advancedPreviewToggle" type="button" aria-expanded="false" aria-controls="advancedPreviewControls">
+                <span class="material-symbols-rounded" aria-hidden="true">tune</span>
+                Advanced preview
               </button>
+              <div class="toolbar-group" id="advancedPreviewControls">
+                <label class="sr-only" for="previewClient">Preview as</label>
+                <select id="previewClient" class="compact-select" aria-label="Preview as">
+                  <option value="canvas">Standard email</option>
+                  <option value="gmail">Gmail</option>
+                  <option value="outlook">Outlook</option>
+                </select>
+                <label class="sr-only" for="previewZoom">Preview zoom</label>
+                <select id="previewZoom" class="compact-select" aria-label="Preview zoom">
+                  <option value="fit">Fit</option>
+                  <option value="1">100%</option>
+                  <option value="0.85">85%</option>
+                  <option value="0.7">70%</option>
+                </select>
+                <button class="preview-theme-toggle" id="previewThemeToggle" type="button" aria-pressed="false" aria-label="Switch preview to dark mode">
+                  <span class="material-symbols-rounded" aria-hidden="true">dark_mode</span>
+                  <span class="preview-theme-label">Dark</span>
+                </button>
+              </div>
             </div>
           </div>
           <div class="preview-wrapper" id="previewWrapper" data-client="canvas" data-preview-theme="light">
@@ -195,7 +206,7 @@
   </main>
 
   <div class="mobile-copy-bar" aria-label="Quick copy actions">
-    <button class="btn btn-primary" id="mobileCopyBtn" type="button" disabled>
+    <button class="btn btn-primary" id="mobileCopyBtn" type="button" aria-describedby="copyRequirementStatus" disabled>
       <span class="material-symbols-rounded" aria-hidden="true">content_copy</span>
       Copy full signature
     </button>

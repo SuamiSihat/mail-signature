@@ -87,6 +87,10 @@ for (const requiredControl of [
   "previewClient",
   "previewZoom",
   "previewThemeToggle",
+  "advancedPreviewToggle",
+  "advancedPreviewControls",
+  "copyRequirementStatus",
+  "installationGuide",
   "gmailSteps",
   "outlookSteps",
   "mobileCopyBtn",
@@ -94,6 +98,8 @@ for (const requiredControl of [
   assert.match(UI, new RegExp(`id="${requiredControl}"`), `UI includes ${requiredControl}`);
 }
 assert.doesNotMatch(UI, /id="(?:qrcode|qrPlaceholder|vcardBtn)"/, "UI removes the separate QR code section");
+assert.match(UI, /id="installationGuide" hidden/, "installation instructions stay hidden until a successful copy");
+assert.match(UI, /id="copyRequirementStatus"[^>]+aria-live="polite"/, "copy readiness is announced accessibly");
 
 const draftMemory = new Map();
 const draftStorage = {
