@@ -1,6 +1,6 @@
 # SuamiSihat Email Signature Generator
 
-Welcome to the **SuamiSihat Email Signature** repository — a fully interactive, browser-based signature generator with live preview, dark/light mode, one-click copy for Gmail, and QR vCard support.
+Welcome to the **SuamiSihat Email Signature** repository — a browser-based signature generator with live preview, full external and compact reply variants, one-click copy for Gmail and Outlook, and an integrated contact QR.
 
 ---
 
@@ -9,17 +9,28 @@ Welcome to the **SuamiSihat Email Signature** repository — a fully interactive
 | Link | Description |
 |------|-------------|
 | 👉 [**Open Signature Generator**](https://suamisihat.github.io/mail-signature/) | Interactive app — fill in your details and copy to Gmail |
-| 👁️ [**Preview Raw Signature**](https://htmlpreview.github.io/?https://github.com/SuamiSihat/mail-signature/blob/main/signature.html) | Static preview for manual copy |
+| 👁️ [**Preview Raw Signature**](https://htmlpreview.github.io/?https://github.com/SuamiSihat/mail-signature/blob/main/signature-full.html) | Static preview for manual copy |
+| 📝 [**Release Notes**](RELEASE_NOTES.md) | Version 2.1.0 highlights, upgrade notes, and prerequisites |
 
 ---
 
 ## ✨ Features
 
 - **Live Preview** — Signature updates in real-time as you type
-- **One-Click Copy** — Copies rich HTML signature directly to clipboard (Gmail-ready)
+- **Two Email-Safe Variants** — Full external and compact reply/internal formats
+- **Dynamic Company Selection** — Company details, branding, contact information, and group URLs are populated from `config/signature-config.yaml`
+- **One-Click Copy** — Copies rich HTML signature directly to the clipboard (Gmail and Outlook-ready)
+- **Brand Aligned** — SS Prussian Blue `#022057`, SS Blue `#043388`, Azure `#21A1F7` accents, and Poppins with safe fallbacks
 - **Dark / Light Mode** — Toggle with memory (saved to browser)
-- **QR vCard** — Auto-generates a scannable contact QR code; download as `.vcf`
-- **Centralized Config** — Admins update `config.js` once to update all company-wide details
+- **Integrated Contact QR** — Adds a scannable vCard QR to the top-right of the full signature
+- **Centralized YAML Config** — Admins update `config/signature-config.yaml` without editing JavaScript
+- **Five SS Companies** — SSH, SSW, SSC, SSE, and SST use independent approved logos and company details
+- **Material Symbols UI** — Consistent Material icons throughout the generator interface
+- **Guided Copy Workflow** — Dedicated full and compact copy actions with Gmail and Outlook instructions
+- **Adaptive Preview** — Email canvas, Gmail, and Outlook preview modes with fit and zoom controls
+- **Accessible Validation** — Required-field guidance, Malaysian phone formatting, keyboard focus states, and responsive mobile controls
+- **Automated Validation** — Pull requests check JavaScript syntax, YAML configuration, asset paths, and email compatibility
+- **Local Draft Saving** — Company, personal details, QR choice, signature format, and preview settings survive refreshes on the same browser
 
 ---
 
@@ -31,6 +42,7 @@ Go to 👉 [**https://suamisihat.github.io/mail-signature/**](https://suamisihat
 ### 2. Fill In Your Details
 | Field | What to Enter |
 |-------|---------------|
+| **Company** | Select your company from the configured dropdown |
 | **Full Name** | Your full name (e.g. Ahmad Rizal bin Abdullah) |
 | **Job Title / Position** | Your role (e.g. Senior Sales Executive) |
 | **Direct Phone / Mobile** | Your direct line or mobile (e.g. +6012 345 6789) |
@@ -39,35 +51,44 @@ Go to 👉 [**https://suamisihat.github.io/mail-signature/**](https://suamisihat
 ### 3. Copy Signature
 Click **📋 Copy Signature** — the signature HTML is now in your clipboard.
 
-### 4. Paste into Gmail
+### 4. Paste into Gmail or Outlook
 1. Open [Gmail](https://mail.google.com) → **⚙️ Settings** → **See all settings**
 2. Under the **General** tab, scroll to **Signature** → click **Create new**
 3. Paste (`Ctrl+V` / `Cmd+V`) into the editor
 4. Scroll to the bottom → click **Save Changes**
 
-### 5. vCard QR Code (Optional)
-Once your name or contact info is filled in, a QR code appears automatically.
-- Scan it with any smartphone to instantly save your contact
-- Click **⬇️ Download .vcf** to get the vCard file
+### 5. Contact QR Code
+The full signature includes a QR code that recipients can scan to save your contact details. The compact reply signature omits it to stay lightweight.
+
+### Local Drafts
+Changes are saved automatically in the browser's local storage. They are not uploaded to a server. Use **Clear** in the Your Details card to remove the saved draft and reset the form.
 
 ---
 
 ## 🛠️ Admin: Updating Company Details
 
-All company-wide values (phone number, address, website, social links, app store links, banner image, and footer disclaimer) are stored in a single configuration file:
+Company profiles, shared social links, app store links, banner image, and footer disclaimer are stored in a single configuration file:
 
-👉 [`config.js`](config.js)
+👉 [`config/signature-config.yaml`](config/signature-config.yaml)
 
 **To update anything company-wide:**
-1. Open `config.js`
-2. Edit the relevant value (e.g. change `hqPhone`, update a social URL, swap `bannerImage`)
-3. Save the file and commit to `main` — all staff using the generator will see the update immediately
+1. Open `config/signature-config.yaml`
+2. Edit the relevant company under `companies` (or add another keyed company profile to create a new dropdown option)
+3. Save the file and submit the change through the normal review workflow
 
-```js
-// Example: Update the HQ phone number
-hqPhone: "+60312345678",
-hqPhoneDisplay: "+603 1234 5678",
+```yaml
+companies:
+  ssh:
+    id: ssh
+    name: "SS Health"
+    hqPhone: "+60356260031"
+    website: "https://suamisihat.com.my"
+    features:
+      showContactQr: true
+    # ...address and approved logo fields
 ```
+
+Shared group links are defined once under `groupWebsites`. Display defaults are controlled under `featureDefaults`, while individual companies can override `showGroupLinks`, `showSocialLinks`, `showCampaignBanner`, `showAppLinks`, or `showContactQr`.
 
 ---
 
@@ -75,12 +96,23 @@ hqPhoneDisplay: "+603 1234 5678",
 
 ```
 mail-signature/
-├── index.html        ← Interactive signature generator app
-├── signature.html    ← Clean, email-safe standalone signature (for manual copy)
-├── config.js         ← ⭐ Company config — edit this to update company-wide details
-├── style.css         ← Generator UI styles (dark/light mode)
-├── generator.js      ← Generator logic (preview, QR, copy)
-├── assets/           ← Image assets (logo, social icons, banners)
+├── index.html                    ← Interactive signature generator
+├── signature-full.html           ← Full external signature preview
+├── signature-compact.html        ← Compact reply signature preview
+├── config/
+│   └── signature-config.yaml     ← Company profiles and shared data
+├── scripts/
+│   ├── config-loader.js          ← YAML loading and validation
+│   └── signature-generator.js    ← Preview, QR, validation and copy logic
+├── styles/
+│   └── app.css                   ← Generator interface styles
+├── assets/
+│   ├── brand/                    ← Approved logos grouped by company
+│   ├── social/                   ← Social-media icons
+│   ├── apps/                     ← App-store badges
+│   └── campaign/                 ← Campaign banner
+├── tests/
+│   └── signature.test.js         ← Compatibility and configuration tests
 └── .github/
     └── workflows/
         └── deploy.yml  ← GitHub Pages auto-deploy
@@ -91,3 +123,5 @@ mail-signature/
 ## 🤝 Support
 
 For issues or questions, contact the SuamiSihat IT/Marketing team.
+
+Before production rollout, complete the [email-client QA checklist](docs/email-client-qa-checklist.md) and review the [deployment prerequisites](docs/deployment-prerequisites.md).
