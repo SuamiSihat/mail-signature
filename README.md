@@ -1,80 +1,93 @@
-# SuamiSihat Email Signature Generator
+# SuamiSihat Email Signature Studio v3.5.1
 
-Welcome to the **SuamiSihat Email Signature** repository — a browser-based signature generator with live preview, full external and compact reply variants, one-click copy for Gmail and Outlook, and an integrated contact QR.
+[![SuamiSihat Brand Compliance](https://img.shields.io/badge/Brand--Compliance-v3.5.1-043388?style=for-the-badge&logo=googlechrome&logoColor=white)](https://assets.suamisihat.myds.me/)
+[![Design System](https://img.shields.io/badge/Design--System-Fluent%202-022057?style=for-the-badge&logo=microsoft&logoColor=white)](https://assets.suamisihat.myds.me/components/)
+[![Tests Passing](https://img.shields.io/badge/Tests-Passing-27C93F?style=for-the-badge&logo=node.js&logoColor=white)](tests/signature.test.js)
+[![License](https://img.shields.io/badge/License-Proprietary-0078D4?style=for-the-badge)](https://suamisihat.com.my)
 
----
-
-## 🚀 Quick Links
-
-| Link | Description |
-|------|-------------|
-| 👉 [**Open Signature Generator**](https://suamisihat.github.io/mail-signature/) | Interactive app — fill in your details and copy to Gmail |
-| 👁️ [**Preview Raw Signature**](https://htmlpreview.github.io/?https://github.com/SuamiSihat/mail-signature/blob/main/signature-full.html) | Static preview for manual copy |
-| 📝 [**Release Notes**](RELEASE_NOTES.md) | Version 2.1.0 highlights, upgrade notes, and prerequisites |
+Welcome to the **SuamiSihat Email Signature Studio (v3.5.1)** — an enterprise-grade, browser-based email signature generator built for **SuamiSihat Group of Companies** (SSH, SSW, SSC, SSE, SST). It delivers real-time live previews, full external and compact reply formats, 1-click presets, contact QR codes, vCard downloads, and pixel-perfect client viewports for Gmail and Outlook.
 
 ---
 
-## ✨ Features
+## 🚀 Quick Links & Live Application
 
-- **Live Preview** — Signature updates in real-time as you type
-- **Two Email-Safe Variants** — Full external and compact reply/internal formats
-- **Dynamic Company Selection** — Company details, branding, contact information, and group URLs are populated from `config/signature-config.yaml`
-- **One-Click Copy** — Copies rich HTML signature directly to the clipboard (Gmail and Outlook-ready)
-- **Brand Aligned** — SS Prussian Blue `#022057`, SS Blue `#043388`, Azure `#21A1F7` accents, and Poppins with safe fallbacks
-- **Dark / Light Mode** — Toggle with memory (saved to browser)
-- **Integrated Contact QR** — Adds a scannable vCard QR to the top-right of the full signature
-- **Centralized YAML Config** — Admins update `config/signature-config.yaml` without editing JavaScript
-- **Five SS Companies** — SSH, SSW, SSC, SSE, and SST use independent approved logos and company details
-- **Material Symbols UI** — Consistent Material icons throughout the generator interface
-- **Guided Copy Workflow** — Dedicated full and compact copy actions with Gmail and Outlook instructions
-- **Adaptive Preview** — Email canvas, Gmail, and Outlook preview modes with fit and zoom controls
-- **Accessible Validation** — Required-field guidance, Malaysian phone formatting, keyboard focus states, and responsive mobile controls
-- **Automated Validation** — Pull requests check JavaScript syntax, YAML configuration, asset paths, and email compatibility
-- **Local Draft Saving** — Company, personal details, QR choice, signature format, and preview settings survive refreshes on the same browser
+| Resource | URL & Action |
+| :--- | :--- |
+| ⚡ **Live Signature Studio** | 👉 [**https://suamisihat.github.io/mail-signature/**](https://suamisihat.github.io/mail-signature/) |
+| 🎨 **Design System Tokens** | 📐 [**SuamiSihat Component Library v3.5.1**](https://assets.suamisihat.myds.me/components/) |
+| 👁️ **Full Raw Signature** | 📄 [**signature-full.html**](signature-full.html) |
+| 👁️ **Compact Reply Signature** | 📄 [**signature-compact.html**](signature-compact.html) |
+
+---
+
+## 🌟 Key Features
+
+- **🎨 Microsoft Fluent 2 UI Redesign**: Implements Design System v3.5.1 color tokens (`#022057` Prussian Blue, `#043388` SS Blue, `#21A1F7` Azure Accent), spatial grids, elevation shadows, and rounded radii.
+- **📐 3-Column Full-Width Grid**: Expanded workspace (`max-width: 1800px`) structured into **Form Details** (Left), **Live Preview Canvas** (Center), and **Quick Staff Presets & Copy Actions** (Right).
+- **⚡ 1-Click Quick Staff Presets**: Instant profile loading for:
+  - 👨‍⚕️ `Dr. Amirul` (Medical Director — SS Clinic)
+  - 💼 `John Doe` (Senior Operations Lead — SS Health)
+  - 🛒 `Rizal Azman` (E-Commerce Operations Lead — SS Ecommerce)
+- **🏷️ Staff ID / MMC Registration Badge**: Supports official clinical and corporate registration tags (`MMC48291`, `SS1042`) rendered as high-contrast pill badges in HTML signatures and embedded into vCard metadata.
+- **📱 Real-World Email Client Viewports**:
+  - 💻 **Web (Desktop)**: Full-width canvas reading pane.
+  - ✉️ **Gmail (Web)**: Pixel-perfect replica of the Gmail Compose Window.
+  - 📧 **Outlook (Web)**: Authentic Outlook Reading Pane styling.
+  - 📱 **Mobile Phone & Tablet iPad**: Responsive mobile frames with dynamic preview scaling.
+- **🌙 Dynamic Light & Dark Mode Adaptation**: Real-time theme switching with dynamic client background adaptation (`Gmail`: `#F6F8FC` / `#111318`, `Outlook`: `#F3F6FA` / `#1B1A19`) and glassmorphic dark-mode logo badges.
+- **📋 Multiple Export Formats**:
+  - **Copy Full Signature**: 1-click rich HTML clipboard export.
+  - **Copy Compact Signature**: Lightweight reply/internal format.
+  - **Download .vcf Contact Card**: 1-click vCard file download (`Ahmad_Rizal.vcf`).
+  - **View Raw HTML Code**: Live code inspector for CRM email builders (HubSpot, Salesforce, ActiveCampaign).
+- **🛡️ 100% Email Client Safe**: Strictly table-based HTML, zero external CSS dependencies, 0 inline `<style>` tags, and 0 `class=` attributes in generated signatures to guarantee rendering across Outlook Desktop 2016/2019/365, Gmail, and Apple Mail.
+
+---
+
+## 📐 Architecture & Layout Grid
+
+```mermaid
+flowchart TD
+    subgraph Header ["Hero Bar"]
+        H["SuamiSihat Signature Studio v3.5.1"]
+    end
+    subgraph Workspace ["3-Column Grid Workspace (max-width: 1800px)"]
+        Col1["Column 1: Details & Company Selector<br>- Company Profile (SSH, SSW, SSC, SSE, SST)<br>- Name, Position, Staff ID / MMC<br>- Phone, Work Email, QR Toggle"]
+        Col2["Column 2: Live Preview Panel<br>- Full / Compact Segmented Switcher<br>- Client Viewport Selector (Gmail, Outlook, Mobile)<br>- Zoom & Light/Dark Mode Toggle<br>- Real-time Left-Aligned Canvas"]
+        Col3["Column 3: Presets & Actions<br>- ⚡ Quick Staff Presets<br>- 📋 Copy Full / Compact Signature<br>- 📥 Download .vcf Contact Card<br>- 💻 View Raw HTML Code<br>- 📖 Gmail & Outlook Setup Guides"]
+    end
+    H --> Workspace
+```
 
 ---
 
 ## 📋 How to Use (for Staff)
 
-### 1. Open the Generator
-Go to 👉 [**https://suamisihat.github.io/mail-signature/**](https://suamisihat.github.io/mail-signature/)
+### 1. Open the Signature Studio
+Visit 👉 [**https://suamisihat.github.io/mail-signature/**](https://suamisihat.github.io/mail-signature/)
 
-### 2. Fill In Your Details
-| Field | What to Enter |
-|-------|---------------|
-| **Company** | Select your company from the configured dropdown |
-| **Full Name** | Your full name (e.g. Ahmad Rizal bin Abdullah) |
-| **Job Title / Position** | Your role (e.g. Senior Sales Executive) |
-| **Direct Phone / Mobile** | Your direct line or mobile (e.g. +6012 345 6789) |
-| **Work Email** | Your company email (e.g. ahmad@suamisihat.com.my) |
+### 2. Enter Your Details (or Select a Quick Preset)
+Click a **Quick Staff Preset** chip on the right column or enter your details manually:
+- **Company**: Select your business unit (`SS Health`, `SS Wellness`, `SS Clinic`, `SS Ecommerce`, `SS Technology`).
+- **Full Name**: Your full name (e.g. `Dr. Amirul`).
+- **Job Title / Position**: Your official role (e.g. `Medical Director`).
+- **Staff ID / MMC Reg No.** *(Optional)*: E.g. `MMC48291` or `SS1042`.
+- **Direct Phone / Mobile**: E.g. `+60 10 789 3661` (Malaysian prefix `+60` formats automatically).
+- **Work Email**: Your company email address.
 
-### 3. Copy Signature
-Click **📋 Copy Signature** — the signature HTML is now in your clipboard.
-
-### 4. Paste into Gmail or Outlook
-1. Open [Gmail](https://mail.google.com) → **⚙️ Settings** → **See all settings**
-2. Under the **General** tab, scroll to **Signature** → click **Create new**
-3. Paste (`Ctrl+V` / `Cmd+V`) into the editor
-4. Scroll to the bottom → click **Save Changes**
-
-### 5. Contact QR Code
-The full signature includes a QR code that recipients can scan to save your contact details. The compact reply signature omits it to stay lightweight.
-
-### Local Drafts
-Changes are saved automatically in the browser's local storage. They are not uploaded to a server. Use **Clear** in the Your Details card to remove the saved draft and reset the form.
+### 3. Copy Signature & Install
+1. Click **Copy full signature** (or **Copy compact signature** for reply threads).
+2. Follow the interactive setup guide in Column 3 for **Gmail** or **Outlook**:
+   - **Gmail**: Go to **Settings** $\rightarrow$ **See all settings** $\rightarrow$ **Signature** $\rightarrow$ Paste (`Ctrl+V` / `Cmd+V`) $\rightarrow$ **Save Changes**.
+   - **Outlook**: Go to **Settings** $\rightarrow$ **Accounts** $\rightarrow$ **Signatures** $\rightarrow$ Paste $\rightarrow$ **Save**.
 
 ---
 
-## 🛠️ Admin: Updating Company Details
+## 🛠️ Admin & Centralized Configuration
 
-Company profiles, shared social links, app store links, banner image, and footer disclaimer are stored in a single configuration file:
+All company profiles, shared social links, app store badges, campaign banners, and footer disclaimers are managed in a single YAML configuration file:
 
 👉 [`config/signature-config.yaml`](config/signature-config.yaml)
-
-**To update anything company-wide:**
-1. Open `config/signature-config.yaml`
-2. Edit the relevant company under `companies` (or add another keyed company profile to create a new dropdown option)
-3. Save the file and submit the change through the normal review workflow
 
 ```yaml
 companies:
@@ -83,45 +96,55 @@ companies:
     name: "SS Health"
     hqPhone: "+60356260031"
     website: "https://suamisihat.com.my"
+    logoUrl: "https://raw.githubusercontent.com/SuamiSihat/mail-signature/main/assets/brand/ssh/primary-light.png"
+    emailLogoUrl: "https://raw.githubusercontent.com/SuamiSihat/mail-signature/main/assets/brand/ssh/secondary-light.png"
     features:
       showContactQr: true
-    # ...address and approved logo fields
 ```
-
-Shared group links are defined once under `groupWebsites`. Display defaults are controlled under `featureDefaults`, while individual companies can override `showGroupLinks`, `showSocialLinks`, `showCampaignBanner`, `showAppLinks`, or `showContactQr`.
 
 ---
 
-## 📁 Project Structure
+## 🧪 Automated Testing
 
+Run the automated email-compatibility and schema test suite locally:
+
+```powershell
+node tests/signature.test.js
 ```
+
+**Test Coverage**:
+- ✅ Validates YAML syntax & profile integrity across all 5 business units.
+- ✅ Asserts zero inline `<style>` tags, zero `class=` attributes, and zero flex/grid styles in exported signatures.
+- ✅ Verifies vCard QR generation and MMC staff ID badge parsing.
+
+---
+
+## 📁 Repository Structure
+
+```text
 mail-signature/
-├── index.html                    ← Interactive signature generator
-├── signature-full.html           ← Full external signature preview
-├── signature-compact.html        ← Compact reply signature preview
+├── index.html                    ← Interactive 3-column signature generator
+├── signature-full.html           ← Full external signature reference
+├── signature-compact.html        ← Compact reply signature reference
 ├── config/
-│   └── signature-config.yaml     ← Company profiles and shared data
+│   └── signature-config.yaml     ← Centralized YAML company profiles & links
 ├── scripts/
-│   ├── config-loader.js          ← YAML loading and validation
-│   └── signature-generator.js    ← Preview, QR, validation and copy logic
+│   ├── config-loader.js          ← JS YAML parser & schema loader
+│   └── signature-generator.js    ← Real-time rendering engine, vCard & copy logic
 ├── styles/
-│   └── app.css                   ← Generator interface styles
+│   └── app.css                   ← Fluent 2 design system tokens & layout styles
 ├── assets/
-│   ├── brand/                    ← Approved logos grouped by company
-│   ├── social/                   ← Social-media icons
-│   ├── apps/                     ← App-store badges
-│   └── campaign/                 ← Campaign banner
+│   ├── brand/                    ← High-resolution company logos (SSH, SSW, SSC, SSE, SST)
+│   ├── social/                   ← Circular social platform icons
+│   ├── apps/                     ← App Store & Google Play badges
+│   └── campaign/                 ← Promotional campaign GIF banner (sigma_banner.gif)
 ├── tests/
-│   └── signature.test.js         ← Compatibility and configuration tests
+│   └── signature.test.js         ← Automated node test suite
 └── .github/
     └── workflows/
-        └── deploy.yml  ← GitHub Pages auto-deploy
+        └── deploy.yml            ← GitHub Pages auto-deployment workflow
 ```
 
 ---
 
-## 🤝 Support
-
-For issues or questions, contact the SuamiSihat IT/Marketing team.
-
-Before production rollout, complete the [email-client QA checklist](docs/email-client-qa-checklist.md) and review the [deployment prerequisites](docs/deployment-prerequisites.md).
+© 2026 **SuamiSihat Group of Companies**. All rights reserved.
