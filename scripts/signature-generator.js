@@ -144,7 +144,7 @@ function getCompanyConfig(cfg, companyId) {
   return { ...cfg, company };
 }
 
-function buildSignatureHTML(name, position, phone, email, cfg, variant = "external") {
+function buildSignatureHTML(name, position, phone, email, cfg, variant = "external", mmc = "") {
   const normalizedPhone = sanitizePhone(phone);
   const normalizedEmail = sanitizeEmail(email);
   const validPhone = isValidPhone(normalizedPhone);
@@ -156,7 +156,9 @@ function buildSignatureHTML(name, position, phone, email, cfg, variant = "extern
   const phoneHref = validPhone ? `tel:${escapeHTML(normalizedPhone)}` : "tel:";
   const emailHref = validEmail ? `mailto:${escapeHTML(normalizedEmail)}` : "mailto:";
   const emailLogoUrl = cfg.company.emailLogoUrl || cfg.company.logoUrl;
-  const qrVCard = buildVCard(name, position, normalizedPhone, normalizedEmail, cfg);
+  const mmcClean = String(mmc || "").trim();
+  const mmcTag = mmcClean ? `<span style="display:inline-block;background:#EBF5FE;color:#043388;font-size:10px;font-weight:700;padding:1px 7px;border-radius:4px;margin-left:6px;border:1px solid #BFDBFE;">${escapeHTML(mmcClean)}</span>` : "";
+  const qrVCard = buildVCard(name, position, normalizedPhone, normalizedEmail, cfg, mmcClean);
   const qrImageUrl = escapeHTML(
     `https://quickchart.io/qr?text=${encodeURIComponent(qrVCard)}&size=240&margin=1&ecLevel=M&dark=022057&light=ffffff`
   );
@@ -180,7 +182,7 @@ function buildSignatureHTML(name, position, phone, email, cfg, variant = "extern
     </td>
     <td width="3" style="width:3px;background-color:#21A1F7;font-size:1px;line-height:1px;">&nbsp;</td>
     <td valign="top" style="padding:0 0 0 12px;vertical-align:top;${font}">
-      <div style="margin:0;color:#022057;font-size:15px;line-height:19px;font-weight:700;${font}">${displayName}</div>
+      <div style="margin:0;color:#022057;font-size:15px;line-height:19px;font-weight:700;${font}">${displayName}${mmcTag}</div>
       <div style="margin:1px 0 5px;color:#043388;font-size:11px;line-height:15px;font-weight:600;${font}">${displayPos} &middot; ${escapeHTML(cfg.company.name)}</div>
       <div style="margin:0;color:#4B5563;font-size:10px;line-height:15px;${font}">
         <a href="${phoneHref}" style="color:#4B5563;text-decoration:none;">${displayPhone}</a>
@@ -198,7 +200,7 @@ function buildSignatureHTML(name, position, phone, email, cfg, variant = "extern
   const socialIcons = showSocialLinks ? Object.values(cfg.social).map(s => `
     <td width="28" style="width:28px;padding:0 5px 0 0;">
       <a href="${s.url}" rel="nofollow noreferrer" target="_blank" style="text-decoration:none;">
-        <img src="${s.icon}" width="22" height="22" border="0" alt="${escapeHTML(s.label)}" style="display:block;width:22px;height:22px;border:0;outline:none;text-decoration:none;">
+        <img src="${s.icon}" width="22" height="22" border="0" alt="${escapeHTML(s.label)}" style="display:block;width:22px;height:22px;border-radius:50%;border:0;outline:none;text-decoration:none;">
       </a>
     </td>`).join("") : "";
   const columnSpan = showContactQr ? 4 : 3;
@@ -211,7 +213,7 @@ function buildSignatureHTML(name, position, phone, email, cfg, variant = "extern
     </td>
     <td width="3" style="width:3px;background-color:#21A1F7;font-size:1px;line-height:1px;">&nbsp;</td>
     <td valign="top" style="padding:0 0 0 16px;vertical-align:top;${font}">
-      <div style="margin:0;color:#022057;font-size:18px;line-height:23px;font-weight:700;${font}">${displayName}</div>
+      <div style="margin:0;color:#022057;font-size:18px;line-height:23px;font-weight:700;${font}">${displayName}${mmcTag}</div>
       <div style="margin:1px 0 10px;color:#043388;font-size:12px;line-height:17px;font-weight:600;${font}">${displayPos}<br>${escapeHTML(cfg.company.name)}</div>
       <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;${font}">
         <tr>
@@ -274,12 +276,13 @@ function buildSignatureHTML(name, position, phone, email, cfg, variant = "extern
 }
 
 // ---- vCard Builder ----
-function buildVCard(name, position, phone, email, cfg) {
+function buildVCard(name, position, phone, email, cfg, mmc = "") {
   const nameParts = (name || "").trim().split(/\s+/);
   const lastName  = nameParts.length > 1 ? nameParts.pop() : "";
   const firstName = nameParts.join(" ");
   const normalizedPhone = sanitizePhone(phone);
   const normalizedEmail = sanitizeEmail(email);
+  const mmcClean = String(mmc || "").trim();
 
   return [
     "BEGIN:VCARD",
@@ -288,6 +291,7 @@ function buildVCard(name, position, phone, email, cfg) {
     `N:${lastName};${firstName};;;`,
     `ORG:${cfg.company.name}`,
     `TITLE:${position || ""}`,
+    mmcClean ? `NOTE:Staff ID / MMC: ${mmcClean}` : "",
     isValidPhone(normalizedPhone) ? `TEL;TYPE=CELL:${normalizedPhone}` : "",
     `TEL;TYPE=WORK:${cfg.company.hqPhone.replace(/\s/g, "")}`,
     isValidEmail(normalizedEmail) ? `EMAIL;TYPE=WORK:${normalizedEmail}` : "",
@@ -387,6 +391,7 @@ if (typeof document !== "undefined") document.addEventListener("DOMContentLoaded
 
   const nameInput = byId("inputName");
   const positionInput = byId("inputPosition");
+  const mmcInput = byId("inputMmc");
   const companyInput = byId("inputCompany");
   const phoneInput = byId("inputPhone");
   const emailInput = byId("inputEmail");
@@ -413,6 +418,7 @@ if (typeof document !== "undefined") document.addEventListener("DOMContentLoaded
   const emailChrome = byId("emailChrome");
   const variantButtons = document.querySelectorAll("[data-variant]");
   const instructionTabs = document.querySelectorAll("[data-instruction]");
+  const presetButtons = document.querySelectorAll("[data-preset]");
 
   byId("themeToggle")?.addEventListener("click", toggleTheme);
 
@@ -430,6 +436,7 @@ if (typeof document !== "undefined") document.addEventListener("DOMContentLoaded
   }
   if (nameInput && typeof savedDraft?.name === "string") nameInput.value = savedDraft.name;
   if (positionInput && typeof savedDraft?.position === "string") positionInput.value = savedDraft.position;
+  if (mmcInput && typeof savedDraft?.mmc === "string") mmcInput.value = savedDraft.mmc;
   if (phoneInput && typeof savedDraft?.phone === "string") phoneInput.value = formatMalaysianPhone(savedDraft.phone);
   if (emailInput && typeof savedDraft?.email === "string") emailInput.value = sanitizeEmail(savedDraft.email);
   if (previewClient && [...previewClient.options].some(option => option.value === savedDraft?.previewClient)) {
@@ -464,6 +471,7 @@ if (typeof document !== "undefined") document.addEventListener("DOMContentLoaded
       companyId: companyInput?.value || CONFIG.defaultCompanyId,
       name: nameInput?.value || "",
       position: positionInput?.value || "",
+      mmc: mmcInput?.value || "",
       phone: phoneInput?.value || "",
       email: emailInput?.value || "",
       contactQr: contactQrInput?.checked ?? true,
@@ -531,6 +539,7 @@ if (typeof document !== "undefined") document.addEventListener("DOMContentLoaded
   function getValues() {
     const name = nameInput?.value.trim() || "";
     const position = positionInput?.value.trim() || "";
+    const mmc = mmcInput?.value.trim() || "";
     const phoneRaw = phoneInput?.value || "";
     const emailRaw = emailInput?.value || "";
     const phone = sanitizePhone(phoneRaw);
@@ -538,6 +547,7 @@ if (typeof document !== "undefined") document.addEventListener("DOMContentLoaded
     return {
       name,
       position,
+      mmc,
       phone,
       email,
       nameValid: name.length >= 2,
@@ -565,7 +575,8 @@ if (typeof document !== "undefined") document.addEventListener("DOMContentLoaded
       values.phoneValid ? values.phone : "",
       values.emailValid ? values.email : "",
       effectiveConfig,
-      variant
+      variant,
+      values.mmc
     );
   }
 
@@ -573,11 +584,105 @@ if (typeof document !== "undefined") document.addEventListener("DOMContentLoaded
     if (!emailChrome || !previewWrapper) return;
     const client = previewClient?.value || "canvas";
     previewWrapper.dataset.client = client;
-    emailChrome.textContent = client === "gmail"
-      ? "Gmail · New message"
-      : client === "outlook"
-        ? "Outlook · New message"
-        : "";
+    const values = getValues();
+    const senderName = values.name || "Ahmad Rizal";
+    const senderEmail = values.email || "ahmad@suamisihat.com.my";
+    const initial = escapeHTML(senderName.charAt(0).toUpperCase());
+
+    if (client === "mobile") {
+      emailChrome.innerHTML = `
+        <div class="chrome-header mobile-chrome">
+          <div class="mobile-top-bar">
+            <span>9:41</span>
+            <span class="material-symbols-rounded" style="font-size:13px;">signal_cellular_4_bar wifi battery_full</span>
+          </div>
+          <div class="mobile-nav-bar">
+            <span class="material-symbols-rounded">arrow_back</span>
+            <span class="app-title">SuamiSihat Mail</span>
+            <span class="material-symbols-rounded">star_border</span>
+          </div>
+          <div class="chrome-subject">RE: Corporate Signature Verification</div>
+          <div class="chrome-sender">
+            <span class="avatar-circle">${initial}</span>
+            <div class="sender-info">
+              <strong>${escapeHTML(senderName)}</strong>
+              <span>&lt;${escapeHTML(senderEmail)}&gt;</span>
+            </div>
+            <span class="timestamp">10:42 AM</span>
+          </div>
+        </div>`;
+    } else if (client === "tablet") {
+      emailChrome.innerHTML = `
+        <div class="chrome-header tablet-chrome">
+          <div class="tablet-nav-bar">
+            <span class="material-symbols-rounded">menu</span>
+            <span class="app-title">Tablet Mail Client &middot; Inbox</span>
+            <span class="material-symbols-rounded">search</span>
+          </div>
+          <div class="chrome-subject">RE: Corporate Signature Verification</div>
+          <div class="chrome-sender">
+            <span class="avatar-circle">${initial}</span>
+            <div class="sender-info">
+              <strong>${escapeHTML(senderName)}</strong> &lt;${escapeHTML(senderEmail)}&gt;
+              <small>To: client@example.com</small>
+            </div>
+            <span class="timestamp">Today, 10:42 AM</span>
+          </div>
+        </div>`;
+    } else if (client === "gmail") {
+      emailChrome.innerHTML = `
+        <div class="gmail-compose-card">
+          <div class="gmail-title-bar">
+            <span>New Message</span>
+            <div class="gmail-win-controls">
+              <span title="Minimize">&minus;</span>
+              <span title="Full screen">&#x2922;</span>
+              <span title="Save &amp; close">&times;</span>
+            </div>
+          </div>
+          <div class="gmail-field-row">
+            <span class="gmail-field-label">To</span>
+            <span class="gmail-cc-bcc">Cc Bcc</span>
+          </div>
+          <div class="gmail-field-row">
+            <span class="gmail-field-label">Subject</span>
+          </div>
+        </div>`;
+    } else if (client === "outlook") {
+      emailChrome.innerHTML = `
+        <div class="chrome-header outlook-chrome">
+          <div class="window-bar outlook-bar">
+            <span class="material-symbols-rounded mail-icon">mail</span>
+            <span class="client-title">Outlook &middot; Reading Pane</span>
+          </div>
+          <div class="chrome-subject">RE: Corporate Signature Verification</div>
+          <div class="chrome-sender">
+            <span class="avatar-circle outlook-avatar">${initial}</span>
+            <div class="sender-info">
+              <strong>${escapeHTML(senderName)}</strong> &lt;${escapeHTML(senderEmail)}&gt;
+              <small>To: Client Team &bull; Wed 10:42 AM</small>
+            </div>
+            <span class="material-symbols-rounded action-icon">reply</span>
+          </div>
+        </div>`;
+    } else {
+      emailChrome.innerHTML = `
+        <div class="chrome-header web-chrome">
+          <div class="window-bar">
+            <span class="window-dot red"></span><span class="window-dot yellow"></span><span class="window-dot green"></span>
+            <span class="client-title">Web Mail Canvas &middot; Full Width Message View</span>
+          </div>
+          <div class="chrome-subject">RE: Corporate Signature Verification</div>
+          <div class="chrome-sender">
+            <span class="avatar-circle">${initial}</span>
+            <div class="sender-info">
+              <strong>${escapeHTML(senderName)}</strong> &lt;${escapeHTML(senderEmail)}&gt;
+              <small>To: recipient@suamisihat.com.my</small>
+            </div>
+            <span class="timestamp">10:42 AM</span>
+          </div>
+        </div>`;
+    }
   }
 
   function updatePreviewScale() {
@@ -587,8 +692,13 @@ if (typeof document !== "undefined") document.addEventListener("DOMContentLoaded
     const availableWidth = Math.max(280, previewWrapper.clientWidth - 48);
     const scale = zoomValue === "fit" ? Math.min(1, availableWidth / naturalWidth) : Number(zoomValue);
     previewEl.style.setProperty("--preview-scale", String(scale));
-    previewStage.style.width = `${naturalWidth * scale}px`;
-    previewStage.style.height = `${previewEl.scrollHeight * scale}px`;
+    
+    const unscaledHeight = Math.max(previewEl.offsetHeight, previewEl.scrollHeight);
+    const scaledWidth = Math.ceil(naturalWidth * scale);
+    const scaledHeight = Math.ceil(unscaledHeight * scale) + 16; // 16px safety padding so bottom is never clipped
+
+    previewStage.style.width = `${scaledWidth}px`;
+    previewStage.style.height = `${scaledHeight}px`;
   }
 
   function update() {
@@ -601,10 +711,10 @@ if (typeof document !== "undefined") document.addEventListener("DOMContentLoaded
     markValidity(phoneInput, phoneError, values.phoneValid, "Use a valid Malaysian or international phone number.");
     markValidity(emailInput, emailError, values.emailValid, "Enter a valid work email address.");
 
-    [copyExternalBtn, copyReplyBtn, mobileCopyBtn].forEach(button => {
+    [copyExternalBtn, copyReplyBtn, mobileCopyBtn, downloadVcardBtn, toggleRawHtmlBtn].forEach(button => {
       if (!button) return;
       button.disabled = !formValid;
-      button.title = formValid ? "" : "Complete the required fields to enable copying.";
+      button.title = formValid ? "" : "Complete the required fields to enable actions.";
     });
     if (copyRequirementStatus) {
       const missing = [];
@@ -624,16 +734,56 @@ if (typeof document !== "undefined") document.addEventListener("DOMContentLoaded
     const currentHTML = buildCurrentHTML(selectedVariant);
     previewEl.innerHTML = localizePreviewAssets(currentHTML);
     renderCompanySummary();
+
+    // Re-trigger scale recalculation when embedded images finish loading so bottom is never cropped
+    previewEl.querySelectorAll("img").forEach(img => {
+      if (!img.complete) {
+        img.addEventListener("load", () => requestAnimationFrame(updatePreviewScale), { once: true });
+      }
+    });
+
     requestAnimationFrame(updatePreviewScale);
+    setTimeout(updatePreviewScale, 100);
+    setTimeout(updatePreviewScale, 300);
     scheduleDraftSave();
   }
 
-  [nameInput, positionInput, emailInput].forEach(input => {
+  [nameInput, positionInput, mmcInput, emailInput].forEach(input => {
     if (!input) return;
     input.addEventListener("input", update);
     input.addEventListener("blur", () => {
       touched.add(input.id);
       if (input === emailInput) input.value = sanitizeEmail(input.value);
+      update();
+    });
+  });
+
+  presetButtons.forEach(button => {
+    button.addEventListener("click", () => {
+      const preset = button.dataset.preset;
+      if (preset === "doctor") {
+        if (companyInput) companyInput.value = "ssc";
+        if (nameInput) nameInput.value = "Dr. Amirul";
+        if (positionInput) positionInput.value = "Medical Director";
+        if (mmcInput) mmcInput.value = "MMC48291";
+        if (phoneInput) phoneInput.value = formatMalaysianPhone("+60 10 789 3661");
+        if (emailInput) emailInput.value = "dr.amirul@suamisihat.com.my";
+      } else if (preset === "operations") {
+        if (companyInput) companyInput.value = "ssh";
+        if (nameInput) nameInput.value = "John Doe";
+        if (positionInput) positionInput.value = "Senior Operations Lead";
+        if (mmcInput) mmcInput.value = "SS1042";
+        if (phoneInput) phoneInput.value = formatMalaysianPhone("+60 3 5626 0031");
+        if (emailInput) emailInput.value = "john.doe@suamisihat.com.my";
+      } else if (preset === "ecommerce") {
+        if (companyInput) companyInput.value = "sse";
+        if (nameInput) nameInput.value = "Rizal Azman";
+        if (positionInput) positionInput.value = "E-Commerce Operations Lead";
+        if (mmcInput) mmcInput.value = "SS2094";
+        if (phoneInput) phoneInput.value = formatMalaysianPhone("+60 11 5998 6564");
+        if (emailInput) emailInput.value = "rizal@store.suamisihat.my";
+      }
+      touched.clear();
       update();
     });
   });
@@ -668,6 +818,23 @@ if (typeof document !== "undefined") document.addEventListener("DOMContentLoaded
     });
   });
 
+  const downloadVcardBtn = byId("downloadVcardBtn");
+  const toggleRawHtmlBtn = byId("toggleRawHtmlBtn");
+
+  function showToast(message) {
+    const container = byId("toastContainer");
+    if (!container) return;
+    const toast = document.createElement("div");
+    toast.className = "ss-toast";
+    toast.innerHTML = `<span class="material-symbols-rounded">check_circle</span><span>${escapeHTML(message)}</span>`;
+    container.appendChild(toast);
+    setTimeout(() => toast.classList.add("show"), 10);
+    setTimeout(() => {
+      toast.classList.remove("show");
+      setTimeout(() => toast.remove(), 300);
+    }, 3000);
+  }
+
   async function handleCopy(variant) {
     const values = getValues();
     const formValid = values.nameValid && values.positionValid && values.phoneValid && values.emailValid;
@@ -679,12 +846,57 @@ if (typeof document !== "undefined") document.addEventListener("DOMContentLoaded
     }
     const copied = await copySignature(buildCurrentHTML(variant));
     showCopyFeedback(copied, variant);
-    if (copied && installationGuide) installationGuide.hidden = false;
+    if (copied) {
+      showToast(`Copied ${variant === "reply" ? "compact" : "full"} signature!`);
+      if (installationGuide) installationGuide.hidden = false;
+    }
   }
 
   copyExternalBtn?.addEventListener("click", () => handleCopy("external"));
   copyReplyBtn?.addEventListener("click", () => handleCopy("reply"));
   mobileCopyBtn?.addEventListener("click", () => handleCopy(selectedVariant));
+
+  downloadVcardBtn?.addEventListener("click", () => {
+    const values = getValues();
+    if (!values.nameValid || !values.emailValid) return;
+    const vcard = buildVCard(values.name, values.position, values.phone, values.email, selectedConfig, values.mmc);
+    const blob = new Blob([vcard], { type: "text/vcard;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    const fileName = `${(values.name || "contact").trim().replace(/\s+/g, "_")}.vcf`;
+    a.download = fileName;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showToast(`Downloaded ${fileName}`);
+  });
+
+  toggleRawHtmlBtn?.addEventListener("click", () => {
+    const container = byId("rawHtmlContainer");
+    const textarea = byId("rawHtmlTextarea");
+    if (!container || !textarea) return;
+    const hidden = container.hidden;
+    container.hidden = !hidden;
+    if (!container.hidden) {
+      textarea.value = buildCurrentHTML(selectedVariant);
+      textarea.select();
+    }
+  });
+
+  byId("copyRawHtmlBtn")?.addEventListener("click", async () => {
+    const textarea = byId("rawHtmlTextarea");
+    if (!textarea) return;
+    try {
+      await navigator.clipboard.writeText(textarea.value);
+      showToast("Copied raw HTML code!");
+    } catch {
+      textarea.select();
+      document.execCommand("copy");
+      showToast("Copied raw HTML code!");
+    }
+  });
   previewClient?.addEventListener("change", () => {
     updateEmailChrome();
     scheduleDraftSave();
@@ -724,6 +936,7 @@ if (typeof document !== "undefined") document.addEventListener("DOMContentLoaded
     if (companyInput) companyInput.value = CONFIG.defaultCompanyId;
     if (nameInput) nameInput.value = "";
     if (positionInput) positionInput.value = "";
+    if (mmcInput) mmcInput.value = "";
     if (phoneInput) phoneInput.value = "";
     if (emailInput) emailInput.value = "";
     selectedVariant = "external";

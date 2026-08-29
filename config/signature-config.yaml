@@ -133,7 +133,7 @@ social:
     label: Telegram
 
 apps:
-  bannerImage: "https://raw.githubusercontent.com/SuamiSihat/mail-signature/main/assets/campaign/join-the-movement.png"
+  bannerImage: "https://raw.githubusercontent.com/SuamiSihat/mail-signature/main/assets/campaign/sigma_banner.gif"
   bannerAlt: "Join The Movement Banner"
   bannerLink: "https://t.me/suamisihat"
   downloadLabel: "Download our app now!"

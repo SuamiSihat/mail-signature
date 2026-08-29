@@ -39,17 +39,17 @@ for (const [variant, html] of Object.entries({ external, reply })) {
   assert.doesNotMatch(html, /<img[^>]+\.svg/i, `${variant}: avoids SVG images unsupported by Outlook desktop`);
 }
 
-assert.match(external, /join-the-movement\.png/, "external: includes the campaign banner");
-assert.match(external, /join-the-movement\.png" width="600"/, "external: banner spans the full signature width");
+assert.match(external, /sigma_banner\.gif/, "external: includes the campaign banner");
+assert.match(external, /sigma_banner\.gif" width="600"/, "external: banner spans the full signature width");
 assert.match(external, /quickchart\.io\/qr\?text=/, "external: includes a hosted PNG contact QR code");
 assert.match(external, /width="120" height="120"[^>]+alt="Scan to save contact"/, "external: positions a scannable contact QR in the header");
 assert.match(external, />PHONE NO<\/td>/, "external: uses the approved phone number label");
 assert.doesNotMatch(external, />DIRECT<\/td>/, "external: no longer uses the direct label");
 assert.match(external, /CONFIDENTIALITY NOTICE:/, "external: includes the disclaimer");
 assert.match(external, /google-play\.png/, "external: includes app links");
-assert.doesNotMatch(reply, /join-the-movement\.png|CONFIDENTIALITY NOTICE:|google-play\.png|quickchart\.io\/qr/, "reply: remains compact");
+assert.doesNotMatch(reply, /sigma_banner\.gif|CONFIDENTIALITY NOTICE:|google-play\.png|quickchart\.io\/qr/, "reply: remains compact");
 assert.doesNotMatch(localizePreviewAssets(external), /raw\.githubusercontent\.com/, "preview uses local repository assets");
-assert.match(localizePreviewAssets(external), /assets\/campaign\/join-the-movement\.png/, "preview preserves organized asset paths");
+assert.match(localizePreviewAssets(external), /assets\/campaign\/sigma_banner\.gif/, "preview preserves organized asset paths");
 
 const escaped = buildSignatureHTML("<script>alert(1)</script>", "Lead", "", "", DEFAULT_CONFIG, "reply");
 assert.doesNotMatch(escaped, /<script>/, "user-entered HTML is escaped");
@@ -75,13 +75,15 @@ assert.equal(
   getCompanyConfig(CONFIG, "ssh").company.address,
   "U1, UOA Business Park, 8-3A, 51A, Jalan Pengaturcara, Seksyen U1, 40150 Shah Alam, Selangor Darul Ehsan, MALAYSIA"
 );
-assert.equal(CONFIG.configVersion, "2.1");
+const mmcSignature = buildSignatureHTML("Dr. Amirul", "Medical Director", "+60107893661", "amirul@suamisihat.com.my", DEFAULT_CONFIG, "external", "MMC48291");
+assert.match(mmcSignature, /MMC48291/, "includes Staff ID / MMC tag when provided");
 
 for (const requiredControl of [
   "copyExternalBtn",
   "copyReplyBtn",
   "companySummary",
   "inputContactQr",
+  "inputMmc",
   "draftStatus",
   "clearDraftBtn",
   "previewClient",
@@ -153,7 +155,7 @@ assert.doesNotMatch(
 );
 assert.doesNotMatch(
   buildSignatureHTML("Amina", "Lead", "+60123456789", "amina@example.com", withoutCampaign, "external"),
-  /join-the-movement|google-play|LinkedIn|>GROUP<\/td>/,
+  /sigma_banner|google-play|LinkedIn|>GROUP<\/td>/,
   "campaign, apps, social links, and group links can be disabled"
 );
 

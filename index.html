@@ -23,11 +23,12 @@
   </nav>
 
   <main class="main-container">
-    <div class="page-header">
-      <div>
-        <span class="eyebrow">SS Brand Tools</span>
-        <h1>Build Your Email Signature</h1>
-        <p>Enter your details once, then copy an approved signature for Gmail or Outlook.</p>
+    <!-- Fluent 2 Simplified Hero Banner -->
+    <div class="ss-hero-container">
+      <div class="ss-hero-main">
+        <span class="ss-hero-badge">SuamiSihat™ v3.5.1</span>
+        <h1>Signature Studio</h1>
+        <p>Corporate email signature generator for SuamiSihat™ brand profiles.</p>
       </div>
       <div class="header-status" id="configStatus" role="status">
         <span class="material-symbols-rounded" aria-hidden="true">sync</span>
@@ -36,121 +37,80 @@
     </div>
 
     <div class="layout-grid">
-      <div class="left-col">
-        <div class="card form-card">
-          <div class="card-header">
-            <div class="card-header-icon"><span class="material-symbols-rounded" aria-hidden="true">person</span></div>
-            <div>
-              <h2>Your details</h2>
-              <p>Required fields must be completed before copying</p>
-            </div>
-            <div class="draft-controls">
-              <span class="draft-status" id="draftStatus" role="status" aria-live="polite">Local draft ready</span>
-              <button class="btn-clear-draft" id="clearDraftBtn" type="button">
-                <span class="material-symbols-rounded" aria-hidden="true">restart_alt</span>
-                Clear
-              </button>
-            </div>
+      <!-- Column 1: Personal Details & Company Selection -->
+      <div class="card form-card">
+        <div class="card-header">
+          <div class="card-header-icon"><span class="material-symbols-rounded" aria-hidden="true">person</span></div>
+          <div>
+            <h2>Your details</h2>
+            <p>Required fields must be completed before copying</p>
           </div>
-          <div class="card-body">
-            <section class="form-section" aria-labelledby="companySectionTitle">
-              <div class="section-heading">
-                <span class="material-symbols-rounded" aria-hidden="true">corporate_fare</span>
-                <h3 id="companySectionTitle">Company</h3>
-              </div>
-              <div class="form-group">
-                <label for="inputCompany">Company profile <span class="required-label">Required</span></label>
-                <select id="inputCompany" autocomplete="organization" aria-describedby="companyHelp"></select>
-                <small class="field-help" id="companyHelp">Branding and company contacts update automatically.</small>
-              </div>
-              <div class="company-summary" id="companySummary" aria-live="polite"></div>
-              <label class="feature-toggle" for="inputContactQr">
-                <span>
-                  <strong>Contact QR</strong>
-                  <small>Include the vCard QR in the full signature</small>
-                </span>
-                <input type="checkbox" id="inputContactQr" checked>
-              </label>
-            </section>
-
-            <section class="form-section" aria-labelledby="personalSectionTitle">
-              <div class="section-heading">
-                <span class="material-symbols-rounded" aria-hidden="true">badge</span>
-                <h3 id="personalSectionTitle">Personal details</h3>
-              </div>
-              <div class="form-group">
-                <label for="inputName">Full name <span class="required-label">Required</span></label>
-                <input type="text" id="inputName" placeholder="e.g. Ahmad Rizal bin Abdullah" autocomplete="name" required aria-describedby="nameError">
-                <small class="field-error" id="nameError" aria-live="polite"></small>
-              </div>
-              <div class="form-group">
-                <label for="inputPosition">Job title / position <span class="required-label">Required</span></label>
-                <input type="text" id="inputPosition" placeholder="e.g. Senior Sales Executive" autocomplete="organization-title" required aria-describedby="positionError">
-                <small class="field-error" id="positionError" aria-live="polite"></small>
-              </div>
-              <div class="form-group">
-                <label for="inputPhone">Direct phone / mobile <span class="optional-label">Optional</span></label>
-                <input type="tel" id="inputPhone" placeholder="e.g. +60 12 345 6789" autocomplete="tel" inputmode="tel" aria-describedby="phoneHelp phoneError">
-                <small class="field-help" id="phoneHelp">Malaysian numbers automatically receive the +60 prefix.</small>
-                <small class="field-error" id="phoneError" aria-live="polite"></small>
-              </div>
-              <div class="form-group">
-                <label for="inputEmail">Work email <span class="required-label">Required</span></label>
-                <input type="email" id="inputEmail" placeholder="e.g. ahmad@suamisihat.com.my" autocomplete="email" inputmode="email" required aria-describedby="emailError">
-                <small class="field-error" id="emailError" aria-live="polite"></small>
-              </div>
-            </section>
+          <div class="draft-controls">
+            <span class="draft-status" id="draftStatus" role="status" aria-live="polite">Local draft ready</span>
+            <button class="btn-clear-draft" id="clearDraftBtn" type="button">
+              <span class="material-symbols-rounded" aria-hidden="true">restart_alt</span>
+              Clear
+            </button>
           </div>
         </div>
+        <div class="card-body">
+          <section class="form-section" aria-labelledby="companySectionTitle">
+            <div class="section-heading">
+              <span class="material-symbols-rounded" aria-hidden="true">corporate_fare</span>
+              <h3 id="companySectionTitle">Company</h3>
+            </div>
+            <div class="form-group">
+              <label for="inputCompany">Company profile <span class="required-label">Required</span></label>
+              <select id="inputCompany" autocomplete="organization" aria-describedby="companyHelp"></select>
+              <small class="field-help" id="companyHelp">Branding and company contacts update automatically.</small>
+            </div>
+            <div class="company-summary" id="companySummary" aria-live="polite"></div>
+            <label class="feature-toggle" for="inputContactQr">
+              <span>
+                <strong>Contact QR</strong>
+                <small>Include the vCard QR in the full signature</small>
+              </span>
+              <input type="checkbox" id="inputContactQr" checked>
+            </label>
+          </section>
 
-        <div class="card copy-card">
-          <div class="card-header">
-            <div class="card-header-icon"><span class="material-symbols-rounded" aria-hidden="true">content_copy</span></div>
-            <div>
-              <h2>Copy signature</h2>
-              <p>Choose the right format for your message</p>
+          <section class="form-section" aria-labelledby="personalSectionTitle">
+            <div class="section-heading">
+              <span class="material-symbols-rounded" aria-hidden="true">badge</span>
+              <h3 id="personalSectionTitle">Personal details</h3>
             </div>
-          </div>
-          <div class="card-body">
-            <div class="btn-actions copy-actions">
-              <button class="btn btn-primary" id="copyExternalBtn" type="button" aria-describedby="copyRequirementStatus" disabled>
-                <span class="material-symbols-rounded" aria-hidden="true">content_copy</span>
-                Copy full signature
-              </button>
-              <button class="btn btn-secondary" id="copyReplyBtn" type="button" aria-describedby="copyRequirementStatus" disabled>
-                <span class="material-symbols-rounded" aria-hidden="true">reply</span>
-                Copy compact signature
-              </button>
-              <p class="copy-requirement" id="copyRequirementStatus" role="status" aria-live="polite">
-                Complete your full name, job title and work email to enable copying.
-              </p>
-              <div class="copy-feedback" id="copyFeedback" role="status" aria-live="polite"></div>
+            <div class="form-group">
+              <label for="inputName">Full name <span class="required-label">Required</span></label>
+              <input type="text" id="inputName" placeholder="e.g. Ahmad Rizal bin Abdullah" autocomplete="name" required aria-describedby="nameError">
+              <small class="field-error" id="nameError" aria-live="polite"></small>
             </div>
-
-            <div class="installation-guide" id="installationGuide" hidden>
-              <h3>Paste your signature</h3>
-              <p>Choose your email client for the final setup steps.</p>
-              <div class="instruction-tabs" role="tablist" aria-label="Installation instructions">
-                <button class="instruction-tab active" type="button" role="tab" aria-selected="true" aria-controls="gmailSteps" id="gmailTab" data-instruction="gmail">Gmail</button>
-                <button class="instruction-tab" type="button" role="tab" aria-selected="false" aria-controls="outlookSteps" id="outlookTab" data-instruction="outlook">Outlook</button>
-              </div>
-              <ol class="steps instruction-panel active" id="gmailSteps" role="tabpanel" aria-labelledby="gmailTab">
-                <li class="step"><span class="step-num">1</span><span>Open <strong>Gmail → Settings → See all settings</strong>.</span></li>
-                <li class="step"><span class="step-num">2</span><span>Create a new signature and paste it into the editor.</span></li>
-                <li class="step"><span class="step-num">3</span><span>Scroll down and select <strong>Save Changes</strong>.</span></li>
-              </ol>
-              <ol class="steps instruction-panel" id="outlookSteps" role="tabpanel" aria-labelledby="outlookTab" hidden>
-                <li class="step"><span class="step-num">1</span><span>Open <strong>Outlook → Settings → Accounts → Signatures</strong>.</span></li>
-                <li class="step"><span class="step-num">2</span><span>Create a signature and paste it into the editor.</span></li>
-                <li class="step"><span class="step-num">3</span><span>Choose the default account and save.</span></li>
-              </ol>
+            <div class="form-group">
+              <label for="inputPosition">Job title / position <span class="required-label">Required</span></label>
+              <input type="text" id="inputPosition" placeholder="e.g. Senior Sales Executive" autocomplete="organization-title" required aria-describedby="positionError">
+              <small class="field-error" id="positionError" aria-live="polite"></small>
             </div>
-          </div>
+            <div class="form-group">
+              <label for="inputMmc">Staff ID / MMC Reg No. <span class="optional-label">Optional</span></label>
+              <input type="text" id="inputMmc" placeholder="e.g. SS1042 or MMC48291" autocomplete="off" aria-describedby="mmcHelp">
+              <small class="field-help" id="mmcHelp">Adds an official clinical / staff ID badge tag to your signature.</small>
+            </div>
+            <div class="form-group">
+              <label for="inputPhone">Direct phone / mobile <span class="optional-label">Optional</span></label>
+              <input type="tel" id="inputPhone" placeholder="e.g. +60 12 345 6789" autocomplete="tel" inputmode="tel" aria-describedby="phoneHelp phoneError">
+              <small class="field-help" id="phoneHelp">Malaysian numbers automatically receive the +60 prefix.</small>
+              <small class="field-error" id="phoneError" aria-live="polite"></small>
+            </div>
+            <div class="form-group">
+              <label for="inputEmail">Work email <span class="required-label">Required</span></label>
+              <input type="email" id="inputEmail" placeholder="e.g. ahmad@suamisihat.com.my" autocomplete="email" inputmode="email" required aria-describedby="emailError">
+              <small class="field-error" id="emailError" aria-live="polite"></small>
+            </div>
+          </section>
         </div>
-
       </div>
 
-      <div class="right-col preview-panel">
+      <!-- Column 2: Live Preview Panel -->
+      <div class="preview-panel">
         <div class="card preview-card">
           <div class="card-header preview-header">
             <div class="card-header-icon"><span class="material-symbols-rounded" aria-hidden="true">visibility</span></div>
@@ -174,11 +134,13 @@
                 Advanced preview
               </button>
               <div class="toolbar-group" id="advancedPreviewControls">
-                <label class="sr-only" for="previewClient">Preview as</label>
-                <select id="previewClient" class="compact-select" aria-label="Preview as">
-                  <option value="canvas">Standard email</option>
-                  <option value="gmail">Gmail</option>
-                  <option value="outlook">Outlook</option>
+                <label class="sr-only" for="previewClient">Preview client and device</label>
+                <select id="previewClient" class="compact-select" aria-label="Preview client and device">
+                  <option value="canvas">💻 Web (Desktop)</option>
+                  <option value="mobile">📱 Mobile (Phone)</option>
+                  <option value="tablet">📱 Tablet (iPad)</option>
+                  <option value="gmail">✉️ Gmail (Web)</option>
+                  <option value="outlook">📧 Outlook (Web)</option>
                 </select>
                 <label class="sr-only" for="previewZoom">Preview zoom</label>
                 <select id="previewZoom" class="compact-select" aria-label="Preview zoom">
@@ -202,6 +164,94 @@
           </div>
         </div>
       </div>
+
+      <!-- Column 3: Quick Staff Presets, Copy Signature & Installation Guide -->
+      <div class="col-right-container">
+        <!-- Quick Preset Staff Profiles Bar -->
+        <div class="preset-profiles-card">
+          <div class="preset-profiles-header">
+            <span class="material-symbols-rounded" aria-hidden="true">bolt</span>
+            <span>Quick Staff Presets</span>
+          </div>
+          <div class="preset-chips-wrap">
+            <button type="button" class="preset-chip-btn" data-preset="doctor">
+              <span class="material-symbols-rounded" aria-hidden="true">stethoscope</span>
+              Dr. Amirul (Medical Director)
+            </button>
+            <button type="button" class="preset-chip-btn" data-preset="operations">
+              <span class="material-symbols-rounded" aria-hidden="true">badge</span>
+              John Doe (Operations Lead)
+            </button>
+            <button type="button" class="preset-chip-btn" data-preset="ecommerce">
+              <span class="material-symbols-rounded" aria-hidden="true">shopping_cart</span>
+              Rizal Azman (E-Commerce Ops)
+            </button>
+          </div>
+        </div>
+
+        <div class="card copy-card">
+          <div class="card-header">
+            <div class="card-header-icon"><span class="material-symbols-rounded" aria-hidden="true">content_copy</span></div>
+            <div>
+              <h2>Copy signature</h2>
+              <p>Choose the right format for your message</p>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="btn-actions copy-actions">
+              <button class="btn btn-primary" id="copyExternalBtn" type="button" aria-describedby="copyRequirementStatus" disabled>
+                <span class="material-symbols-rounded" aria-hidden="true">content_copy</span>
+                Copy full signature
+              </button>
+              <button class="btn btn-secondary" id="copyReplyBtn" type="button" aria-describedby="copyRequirementStatus" disabled>
+                <span class="material-symbols-rounded" aria-hidden="true">reply</span>
+                Copy compact signature
+              </button>
+              <div class="secondary-actions">
+                <button class="btn btn-ghost" id="downloadVcardBtn" type="button" title="Download .vcf contact file for Outlook or mobile contacts" disabled>
+                  <span class="material-symbols-rounded" aria-hidden="true">download</span>
+                  Download .vcf contact card
+                </button>
+                <button class="btn btn-ghost" id="toggleRawHtmlBtn" type="button" title="View raw HTML code for CRM email templates" disabled>
+                  <span class="material-symbols-rounded" aria-hidden="true">code</span>
+                  View raw HTML code
+                </button>
+              </div>
+              <p class="copy-requirement" id="copyRequirementStatus" role="status" aria-live="polite">
+                Complete your full name, job title and work email to enable copying.
+              </p>
+              <div class="copy-feedback" id="copyFeedback" role="status" aria-live="polite"></div>
+
+              <div class="raw-html-container" id="rawHtmlContainer" hidden>
+                <div class="raw-html-header">
+                  <span>Raw Email Signature HTML</span>
+                  <button class="btn btn-xs btn-primary" id="copyRawHtmlBtn" type="button">Copy HTML</button>
+                </div>
+                <textarea class="raw-html-textarea" id="rawHtmlTextarea" readonly spellcheck="false"></textarea>
+              </div>
+            </div>
+
+            <div class="installation-guide" id="installationGuide" hidden>
+              <h3>Paste your signature</h3>
+              <p>Choose your email client for the final setup steps.</p>
+              <div class="instruction-tabs" role="tablist" aria-label="Installation instructions">
+                <button class="instruction-tab active" type="button" role="tab" aria-selected="true" aria-controls="gmailSteps" id="gmailTab" data-instruction="gmail">Gmail</button>
+                <button class="instruction-tab" type="button" role="tab" aria-selected="false" aria-controls="outlookSteps" id="outlookTab" data-instruction="outlook">Outlook</button>
+              </div>
+              <ol class="steps instruction-panel active" id="gmailSteps" role="tabpanel" aria-labelledby="gmailTab">
+                <li class="step"><span class="step-num">1</span><span>Open <strong>Gmail → Settings → See all settings</strong>.</span></li>
+                <li class="step"><span class="step-num">2</span><span>Create a new signature and paste it into the editor.</span></li>
+                <li class="step"><span class="step-num">3</span><span>Scroll down and select <strong>Save Changes</strong>.</span></li>
+              </ol>
+              <ol class="steps instruction-panel" id="outlookSteps" role="tabpanel" aria-labelledby="outlookTab" hidden>
+                <li class="step"><span class="step-num">1</span><span>Open <strong>Outlook → Settings → Accounts → Signatures</strong>.</span></li>
+                <li class="step"><span class="step-num">2</span><span>Create a signature and paste it into the editor.</span></li>
+                <li class="step"><span class="step-num">3</span><span>Choose the default account and save.</span></li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </main>
 
@@ -210,7 +260,7 @@
       <span class="material-symbols-rounded" aria-hidden="true">content_copy</span>
       Copy full signature
     </button>
-  </div>
+  <div class="toast-container" id="toastContainer" role="status" aria-live="polite"></div>
 
   <script src="scripts/config-loader.js"></script>
   <script src="scripts/signature-generator.js"></script>
